@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/Rosalina121/ShairportGUI/issues"
   },
-  "homepage": "https://github.com/Rosalina121/ShairportGUI#readme"
+  "homepage": "https://github.com/Rosalina121/ShairportGUI#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "shairport-sync-reader": "^0.0.9",
+    "socket.io": "^4.5.0"
+  }
 }
