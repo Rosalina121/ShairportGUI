@@ -74,7 +74,7 @@
             });
 
             socket.on('pictureData', function(pictureData) {
-                let img = document.getElementById('title');
+                let img = document.getElementById('cover');
                 img.src = `data:image/png;base64,` + pictureData;
                 console.log('picture get!');
             });
