@@ -63,7 +63,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
         <script>
             var socket = io();
-            io.on('metadata', function(metadata) {
+            socket.on('metadata', function(metadata) {
                 let title = document.getElementById('title');
                 let album = document.getElementById('album');
                 let artist = document.getElementById('artist');
@@ -73,7 +73,7 @@
                 console.log('data get!');
             });
 
-            io.on('pictureData', function(pictureData) {
+            socket.on('pictureData', function(pictureData) {
                 let img = document.getElementById('title');;
                 img.src = pictureData;
                 console.log('picture get!');
