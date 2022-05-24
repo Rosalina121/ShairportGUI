@@ -75,8 +75,7 @@
 
             socket.on('pictureData', function(pictureData) {
                 let img = document.getElementById('title');
-                console.log(pictureData);
-                img.src = pictureData;
+                img.src = `data:image/png;base64,` + pictureData;
                 console.log('picture get!');
             });
         </script>
