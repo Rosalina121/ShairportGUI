@@ -5,7 +5,16 @@ const app = express();
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "192.168.1.181:3000",
+        methods: ["GET,POST"],
+        credentials: true,
+        transports: ['websocket', 'polling'],
+    },
+    allowEIO3: true
+
+});
 
 // read from pipe
 var pipeReader = new ShairportReader({ path: '/tmp/shairport-sync-metadata' });
