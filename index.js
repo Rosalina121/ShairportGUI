@@ -8,7 +8,7 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 
 // read from pipe
-var pipeReader = new ShairportReader({ address: '127.0.0.1', port: '5555' });
+var pipeReader = new ShairportReader({ path: '/tmp/shairport-sync-metadata' });
 
 // listen for metadata
 pipeReader.on("meta", function (metadata) {
