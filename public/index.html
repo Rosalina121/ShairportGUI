@@ -56,11 +56,28 @@
         </style>
     </head>
     <body>
-        <div>dupa</div>
-        <img src="" alt="" />
+        <div id="title">tit</div>
+        <div id="album">alb</div>
+        <div id="artist">art</div>
+        <img id="cover" src="" alt="" />
         <script src="/socket.io/socket.io.js"></script>
         <script>
             var socket = io();
+            io.on('metadata', function(metadata) {
+                let title = document.getElementById('title');
+                let album = document.getElementById('album');
+                let artist = document.getElementById('artist');
+                title.textContent = metadata.title;
+                album.textContent = metadata.album;
+                artist.textContent = metadata.artist;
+                console.log('data get!');
+            });
+
+            io.on('pictureData', function(pictureData) {
+                let img = document.getElementById('title');;
+                img.src = pictureData;
+                console.log('picture get!');
+            });
         </script>
     </body>
 </html>

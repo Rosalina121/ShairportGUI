@@ -12,16 +12,20 @@ var pipeReader = new ShairportReader({ path: '/tmp/shairport-sync-metadata' });
 
 // listen for metadata
 pipeReader.on("meta", function (metadata) {
-    console.log('dupa');
-    console.log(metadata);
+    console.log('got meta: ');
     // parse metadata
-    io.emit("metadata", metadata);
+    let title = metadata.minm;
+    let artist = metadata.asar;
+    let album = metadata.asal;
+    console.log(title + " - " + artist + " - " + album);
+    io.emit("metadata", {title, artist, album});
 });
 
 pipeReader.on("PICT", function(pictureData) {
     console.log(pictureData);
-    // to base64
-    io.emit("pictureData", pictureData);
+    // pirctureData to base64
+    let base64 = Buffer.from(pictureData).toString('base64');
+    io.emit("pictureData", base64);
 })
 
 app.get("/", (req, res) => {
