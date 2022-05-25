@@ -25,7 +25,7 @@
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
-                gap: 10%;
+                gap: 20%;
                 background-color: rgba(255, 255, 255, 0.5);
                 background: linear-gradient(
                     0deg,
@@ -140,7 +140,7 @@
                 let img = "url('data:image/png;base64, " + pictureData + "')";
                 // img.src = `data:image/png;base64,` + pictureData;
                 console.log("picture get!");
-                document.getElementsByClassName("song-thumbnail").style.backgroundImage = img;
+                document.getElementsByClassName("song-thumbnail").style = 'background-image: ' + img + '!important;';
                 console.log("picture set!");
             });
         </script>
