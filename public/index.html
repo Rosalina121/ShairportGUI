@@ -25,7 +25,7 @@
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
-                gap: 20%;
+                gap: 10%;
                 background-color: rgba(255, 255, 255, 0.5);
                 background: linear-gradient(
                     0deg,
@@ -42,9 +42,6 @@
             }
 
             .song-thumbnail {
-                background-image: url("https://images.unsplash.com/photo-1557672172-298e090bd0f1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80s");
-                background-size: cover;
-                background-position: center center;
                 height: 600px;
                 width: 600px;
                 border-radius: 50%;
@@ -109,7 +106,7 @@
         <div class="container">
             <div id="phone">
                 <div class="thumbnail-border">
-                    <div class="song-thumbnail"></div>
+                    <img id="cover" src="" class="song-thumbnail"></div>
                 </div>
                 <!--/thumbnail-border -->
 
@@ -137,10 +134,9 @@
             });
 
             socket.on("pictureData", function (pictureData) {
-                let img = "url('data:image/png;base64, " + pictureData + "')";
-                // img.src = `data:image/png;base64,` + pictureData;
                 console.log("picture get!");
-                document.getElementsByClassName("song-thumbnail").style = 'background-image: ' + img + '!important;';
+                let img = document.getElementById('cover');
+                img.src = `data:image/png;base64,` + pictureData;
                 console.log("picture set!");
             });
         </script>
