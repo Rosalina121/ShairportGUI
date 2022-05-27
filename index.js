@@ -35,11 +35,11 @@ const saveBase64ImageToDisk = (data, fileName) => {
 const emitPalette = (image) => {
     palette = vibrant.from(image).getPalette((err, palette) => {
         let paletteObj = {
-            songColor: palette.Vibrant.hex,
-            tlShadow: palette.DarkVibrant.hex,
-            borderColor: palette.LightVibrant.hex,
-            brShadow: palette.DarkMuted.hex,
-            artistColor: palette.LightMuted.hex,
+            songColor: palette.Vibrant.rgb,
+            tlShadow: palette.DarkVibrant.rgb,
+            borderColor: palette.LightVibrant.rgb,
+            brShadow: palette.DarkMuted.rgb,
+            artistColor: palette.LightMuted.rgb,
         };
         io.emit("palette", paletteObj);
     });
