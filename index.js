@@ -45,6 +45,11 @@ const emitPalette = (image) => {
     });
 };
 
+const removeBrackets = (str) => {
+    str = str.replace(/\[[^]*\]/,'');
+    return str.replace(/\([^]*\)/,'');
+};
+
 // read from pipe
 var pipeReader = new ShairportReader({ path: '/tmp/shairport-sync-metadata' });
 
@@ -55,7 +60,8 @@ pipeReader.on("meta", function (metadata) {
     let title = metadata.minm;
     let artist = metadata.asar;
     let album = metadata.asal;
-    title = title.replace(/\[[^]*\]/,'');
+    title = removeBrackets(title);
+    artist = removeBrackets(artist);
     console.log(title + " - " + artist + " - " + album);
     io.emit("metadata", {title, artist, album});
 });
