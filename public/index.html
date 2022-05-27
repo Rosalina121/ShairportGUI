@@ -6,14 +6,17 @@
             @import url("https://fonts.googleapis.com/css2?family=Khula:wght@400;600;700&family=Public+Sans:wght@100;300;400;600&display=swap");
 
             :root {
-                --brShadow: -6px 6px 15px rgba(0, 0, 0, 0.5);
-                --tlShadow: 6px -6px 15px rgba(255, 255, 255, 0.8);
+                --brShadow: -6px 6px 10px #ffffff;
+                --tlShadow: 6px -6px 10px #ffffff;
+                --songColor: #ffffff;
+                --artistColor: #ffffff;
+                --borderColor: #ffffff;
             }
 
             body {
                 background-color: #000000;
                 font-family: "Public Sans", sans-serif;
-                color: #3c3c3c;
+                color: var(--songColor);
                 overflow: hidden;
             }
 
@@ -50,18 +53,19 @@
                 justify-content: center;
                 /* gap: 10%; commented coz doesn't work on chromium pi*/
                 background-color: rgba(255, 255, 255, 0.5);
-                background: linear-gradient(
+                /* background: linear-gradient(
                     0deg,
-                    rgba(255, 255, 255, 0.1) 0%,
+                    rgba(255, 255, 255, 0.0) 0%,
                     rgba(255, 255, 255, 0.5) 50%,
-                    rgba(255, 255, 255, 0.1) 100%
-                );
+                    rgba(255, 255, 255, 0.0) 100%
+                ); */
+                background: none;
                 height: 90vh;
                 width: 90%;
                 padding: 2-px;
                 border-radius: 25px;
-                box-shadow: rgba(223, 230, 255, 0.1) 0px 48px 100px 0px,
-                    rgba(43, 42, 46, 0.15) 0px 30px 100px 0px;
+                /* box-shadow: rgba(223, 230, 255, 0.1) 0px 48px 100px 0px, */
+                /* rgba(43, 42, 46, 0.15) 0px 30px 100px 0px; */
             }
 
             .song-thumbnail {
@@ -76,10 +80,11 @@
                 width: 600px;
                 border-radius: 50%;
                 padding: 0.4rem;
-                box-shadow: inset 6px 6px 20px 0 rgba(104, 139, 255, 0.2),
-                    rgba(104, 139, 255, 0.1) 0px 4px 20px,
-                    rgba(104, 139, 255, 0.1) 0px 8px 24px,
-                    rgba(102, 111, 128, 0.4) 0px 16px 45px;
+                background-color: var(--borderColor);
+                box-shadow: inset 6px 6px 20px 0 rgba(255, 255, 255, 0.2),
+                    rgba(255, 255, 255, 0.1) 0px 4px 20px,
+                    rgba(255, 255, 255, 0.1) 0px 8px 24px,
+                    rgba(126, 126, 126, 0.4) 0px 16px 45px;
                 /* animation: spin 40s linear infinite; */
             }
 
@@ -107,7 +112,7 @@
 
             .artist {
                 font-size: 2rem;
-                color: #cfcfcf;
+                color: var(--artistColor);
             }
 
             @keyframes spin {
@@ -150,6 +155,15 @@
         <!-- /container -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
         <script>
+            let r = document.querySelector(":root");
+            const applyPallette = (palette) => {
+                r.style.setProperty("--songColor", palette.songColor);
+                r.style.setProperty("--artistColor", palette.artistColor);
+                r.style.setProperty("--borderColor", palette.borderColor);
+                r.style.setProperty("--brShadow", "-6px 6px 10px" + palette.brShadow);
+                r.style.setProperty("--tlShadow", "6px -6px 10px" + palette.tlShadow);
+            };
+
             var socket = io();
             socket.on("metadata", function (metadata) {
                 let title = document.getElementById("title");
@@ -170,6 +184,12 @@
                 console.log("cover picture set!");
                 bgImg.style.backgroundImage = `url(data:image/png;base64,${pictureData})`;
                 console.log("background picture set!");
+            });
+
+            socket.on("palette", function (palette) {
+                console.log("palette get!");
+                applyPallette(palette);
+                console.log("palette set!");
             });
         </script>
     </body>
