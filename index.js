@@ -41,6 +41,7 @@ const emitPalette = (image) => {
             brShadow: palette.DarkMuted.rgb,
             artistColor: palette.LightMuted.rgb,
         };
+        console.log(paletteObj);
         io.emit("palette", paletteObj);
     });
 };
