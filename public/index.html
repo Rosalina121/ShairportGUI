@@ -13,6 +13,8 @@
                 --songColor: rgb(254, 1, 193);
                 --artistColor: rgb(249, 212, 2);
                 --borderColor: rgb(0, 194, 255);
+                --brShadowColorForBoxShadow: 255, 255, 255;
+                --tlShadowColorForBoxShadow: 255, 255, 255;
             }
 
             body {
@@ -75,10 +77,10 @@
                 border-radius: 50%;
                 padding: 0.4rem;
                 background-color: var(--borderColor);
-                box-shadow: inset 6px 6px 20px 0 rgba(var(--brShadowColor), 0.2),
-                    rgba(var(--brShadowColor), 0.1) 0px 4px 20px,
-                    rgba(var(--brShadowColor), 0.1) 0px 8px 24px,
-                    rgba(var(--tlShadowColor), 0.4) 0px 16px 45px;
+                box-shadow: inset 6px 6px 20px 0 rgba(var(--brShadowColorForBoxShadow), 0.2),
+                    rgba(var(--brShadowColorForBoxShadow), 0.1) 0px 4px 20px,
+                    rgba(var(--brShadowColorForBoxShadow), 0.1) 0px 8px 24px,
+                    rgba(var(--tlShadowColorForBoxShadow), 0.4) 0px 16px 45px;
                 /* animation: spin 40s linear infinite; */
             }
 
@@ -157,6 +159,8 @@
                     r.style.setProperty(`--${color}`, "rgb(" + palette[color] + ")");
                     console.log(`${color}: rgb${palette[color]}`);
                 }
+                r.style.setProperty(`--brShadowColorForBoxShadow`, `${palette.brShadowColor}`);
+                r.style.setProperty(`--tlShadowColorForBoxShadow`, `${palette.tlShadowColor}`);
             };
 
             var socket = io();
