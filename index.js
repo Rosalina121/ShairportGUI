@@ -56,7 +56,7 @@ pipeReader.on("meta", function (metadata) {
     let artist = metadata.asar;
     let album = metadata.asal;
     title = title.replace(/\[[^]*\]/,'');
-    console.log(shortTitle + " - " + artist + " - " + album);
+    console.log(title + " - " + artist + " - " + album);
     io.emit("metadata", {title, artist, album});
 });
 
