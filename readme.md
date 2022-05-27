@@ -24,7 +24,7 @@ This project is inspired by [Shairport Sync Metadata Display](https://github.com
 ## Run
 ```
 $ npm install
-$ node index.js
+$ npm start
 ```
 
 ## Notes
