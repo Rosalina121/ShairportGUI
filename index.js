@@ -37,9 +37,9 @@ const emitPalette = (image) => {
         let paletteObj = {
             songColor: palette.Vibrant.hex,
             tlShadow: palette.DarkVibrant.hex,
-            artistColor: palette.LightVibrant.hex,
+            borderColor: palette.LightVibrant.hex,
             brShadow: palette.DarkMuted.hex,
-            borderColor: palette.LightMuted.hex,
+            artistColor: palette.LightMuted.hex,
         };
         io.emit("palette", paletteObj);
     });
