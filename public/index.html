@@ -6,13 +6,13 @@
             @import url("https://fonts.googleapis.com/css2?family=Khula:wght@400;600;700&family=Public+Sans:wght@100;300;400;600&display=swap");
 
             :root {
-                --brShadowColor: #ffffff;
-                --tlShadowColor: #ffffff;
+                --brShadowColor: rgb(151, 0, 116);
+                --tlShadowColor: rgb(0, 96, 126);
                 --brShadow: -3px 3px 15px var(--brShadowColor);
                 --tlShadow: 3px -3px 15px var(--tlShadowColor);
-                --songColor: #ffffff;
-                --artistColor: #ffffff;
-                --borderColor: #ffffff;
+                --songColor: rgb(254, 1, 193);
+                --artistColor: rgb(249, 212, 2);
+                --borderColor: rgb(0, 194, 255);
             }
 
             body {
@@ -153,11 +153,10 @@
         <script>
             let r = document.querySelector(":root");
             const applyPallette = (palette) => {
-                r.style.setProperty("--songColor", palette.songColor);
-                r.style.setProperty("--artistColor", palette.artistColor);
-                r.style.setProperty("--borderColor", palette.borderColor);
-                r.style.setProperty("--brShadowColor", palette.brShadow);
-                r.style.setProperty("--tlShadowColor", palette.tlShadow);
+                for (color in palette) {
+                    r.style.setProperty(`--${color}`, "rgb" + palette[color]);
+                    console.log(`${color}: rgb${palette[color]}`);
+                }
             };
 
             var socket = io();
