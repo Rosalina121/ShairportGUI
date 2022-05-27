@@ -61,7 +61,7 @@ pipeReader.on("meta", function (metadata) {
     let artist = metadata.asar;
     let album = metadata.asal;
     title = removeBrackets(title);
-    artist = removeBrackets(artist);
+    album = removeBrackets(album);
     console.log(title + " - " + artist + " - " + album);
     io.emit("metadata", {title, artist, album});
 });
