@@ -61,8 +61,8 @@ pipeReader.on("meta", function (metadata) {
     let title = metadata.minm;
     let artist = metadata.asar;
     let album = metadata.asal;
-    title = removeBrackets(title);
-    album = removeBrackets(album);
+    title = removeBrackets(title);  // get rid of brackets coz text is too long
+    album = removeBrackets(album);  // same
     console.log(title + " - " + artist + " - " + album);
     io.emit("metadata", {title, artist, album});
 });
