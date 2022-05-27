@@ -154,7 +154,7 @@
             let r = document.querySelector(":root");
             const applyPallette = (palette) => {
                 for (color in palette) {
-                    r.style.setProperty(`--${color}`, "rgb" + palette[color]);
+                    r.style.setProperty(`--${color}`, "rgb(" + palette[color] + ")");
                     console.log(`${color}: rgb${palette[color]}`);
                 }
             };
