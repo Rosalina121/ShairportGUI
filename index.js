@@ -11,7 +11,7 @@ const fs = require("fs")
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "192.168.1.181:3000",
+        origin: "192.168.1.181:3000",   // change this to your local ip
         methods: ["GET,POST"],
         credentials: true,
         transports: ['websocket', 'polling'],
@@ -52,7 +52,7 @@ const removeBrackets = (str) => {
 };
 
 // read from pipe
-var pipeReader = new ShairportReader({ path: '/tmp/shairport-sync-metadata' });
+var pipeReader = new ShairportReader({ path: '/tmp/shairport-sync-metadata' }); // your metadata pipe path
 
 // listen for metadata
 pipeReader.on("meta", function (metadata) {
