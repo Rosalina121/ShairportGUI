@@ -55,8 +55,9 @@ pipeReader.on("meta", function (metadata) {
     let title = metadata.minm;
     let artist = metadata.asar;
     let album = metadata.asal;
-    console.log(title + " - " + artist + " - " + album);
-    io.emit("metadata", {title, artist, album});
+    let shortTitle = title.replace(/\[[^]*\]/,'');
+    console.log(shortTitle + " - " + artist + " - " + album);
+    io.emit("metadata", {shortTitle, artist, album});
 });
 
 pipeReader.on("PICT", function(pictureData) {
