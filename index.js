@@ -5,6 +5,8 @@ const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 const vibrant = require("node-vibrant");
+const fs = require("fs")
+
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -18,13 +20,20 @@ const io = new Server(server, {
 
 });
 
-const vibrantTest = (image) => {
+const saveBase64ImageToDisk = (data, fileName) => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(fileName, data, "base64", (err) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(fileName);
+            }
+        });
+    });
+};
+
+const emitPalette = (image) => {
     palette = vibrant.from(image).getPalette((err, palette) => {
-        // console.log(palette.Vibrant.hex);
-        // console.log(palette.DarkVibrant.hex);
-        // console.log(palette.LightVibrant.hex);
-        // console.log(palette.DarkMuted.hex);
-        console.log(palette.LightMuted.hex);
         let paletteObj = {
             songColor: palette.Vibrant.hex,
             tlShadow: palette.DarkVibrant.hex,
@@ -32,14 +41,9 @@ const vibrantTest = (image) => {
             brShadow: palette.DarkMuted.hex,
             artistColor: palette.LightMuted.hex,
         };
-        // console.log(paletteObj);
         io.emit("palette", paletteObj);
     });
-
-    io.emit("palette", palette);
-}
-
-vibrantTest("https://test.palitechnika.com/rosa.png");
+};
 
 // read from pipe
 var pipeReader = new ShairportReader({ path: '/tmp/shairport-sync-metadata' });
@@ -59,6 +63,12 @@ pipeReader.on("PICT", function(pictureData) {
     console.log(pictureData);
     // pirctureData to base64
     let base64 = Buffer.from(pictureData).toString('base64');
+    // save to disk
+    saveBase64ImageToDisk(base64, './image.png').then((fileName) => {
+        console.log(fileName);
+        // get palette
+        emitPalette(fileName);
+    });
     io.emit("pictureData", base64);
 })
 
