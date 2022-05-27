@@ -6,8 +6,10 @@
             @import url("https://fonts.googleapis.com/css2?family=Khula:wght@400;600;700&family=Public+Sans:wght@100;300;400;600&display=swap");
 
             :root {
-                --brShadow: -3px 3px 15px #ffffff;
-                --tlShadow: 3px -3px 15px #ffffff;
+                --brShadowColor: #ffffff;
+                --tlShadowColor: #ffffff;
+                --brShadow: -3px 3px 15px var(--brShadowColor);
+                --tlShadow: 3px -3px 15px var(--tlShadowColor);
                 --songColor: #ffffff;
                 --artistColor: #ffffff;
                 --borderColor: #ffffff;
@@ -53,19 +55,11 @@
                 justify-content: center;
                 /* gap: 10%; commented coz doesn't work on chromium pi*/
                 background-color: rgba(255, 255, 255, 0.5);
-                /* background: linear-gradient(
-                    0deg,
-                    rgba(255, 255, 255, 0.0) 0%,
-                    rgba(255, 255, 255, 0.5) 50%,
-                    rgba(255, 255, 255, 0.0) 100%
-                ); */
                 background: none;
                 height: 90vh;
                 width: 90%;
                 padding: 2-px;
                 border-radius: 25px;
-                /* box-shadow: rgba(223, 230, 255, 0.1) 0px 48px 100px 0px, */
-                /* rgba(43, 42, 46, 0.15) 0px 30px 100px 0px; */
             }
 
             .song-thumbnail {
@@ -81,9 +75,10 @@
                 border-radius: 50%;
                 padding: 0.4rem;
                 background-color: var(--borderColor);
-                box-shadow: inset 6px 6px 20px 0 var(--brShadow),
-                    var(--brShadow) 0px 4px 20px, var(--brShadow) 0px 8px 24px,
-                    var(--brShadow) 0px 16px 45px;
+                box-shadow: inset 6px 6px 20px 0 rgba(var(--brShadowColor), 0.2),
+                    rgba(var(--brShadowColor), 0.1) 0px 4px 20px,
+                    rgba(var(--brShadowColor), 0.1) 0px 8px 24px,
+                    rgba(var(--tlShadowColor), 0.4) 0px 16px 45px;
                 /* animation: spin 40s linear infinite; */
             }
 
@@ -161,14 +156,8 @@
                 r.style.setProperty("--songColor", palette.songColor);
                 r.style.setProperty("--artistColor", palette.artistColor);
                 r.style.setProperty("--borderColor", palette.borderColor);
-                r.style.setProperty(
-                    "--brShadow",
-                    "-3px 3px 15px" + palette.brShadow
-                );
-                r.style.setProperty(
-                    "--tlShadow",
-                    "3px -3px 15px" + palette.tlShadow
-                );
+                r.style.setProperty("--brShadowColor", palette.brShadow);
+                r.style.setProperty("--tlShadowColor", palette.tlShadow);
             };
 
             var socket = io();
