@@ -81,10 +81,9 @@
                 border-radius: 50%;
                 padding: 0.4rem;
                 background-color: var(--borderColor);
-                box-shadow: inset 6px 6px 20px 0 rgba(255, 255, 255, 0.2),
-                    rgba(255, 255, 255, 0.1) 0px 4px 20px,
-                    rgba(255, 255, 255, 0.1) 0px 8px 24px,
-                    rgba(126, 126, 126, 0.4) 0px 16px 45px;
+                box-shadow: inset 6px 6px 20px 0 var(--brShadow),
+                    var(--brShadow) 0px 4px 20px, var(--brShadow) 0px 8px 24px,
+                    var(--brShadow) 0px 16px 45px;
                 /* animation: spin 40s linear infinite; */
             }
 
@@ -162,8 +161,14 @@
                 r.style.setProperty("--songColor", palette.songColor);
                 r.style.setProperty("--artistColor", palette.artistColor);
                 r.style.setProperty("--borderColor", palette.borderColor);
-                r.style.setProperty("--brShadow", "-3px 3px 15px" + palette.brShadow);
-                r.style.setProperty("--tlShadow", "3px -3px 15px" + palette.tlShadow);
+                r.style.setProperty(
+                    "--brShadow",
+                    "-3px 3px 15px" + palette.brShadow
+                );
+                r.style.setProperty(
+                    "--tlShadow",
+                    "3px -3px 15px" + palette.tlShadow
+                );
             };
 
             var socket = io();
