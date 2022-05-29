@@ -34,9 +34,9 @@ const emitPalette = (image) => {
     palette = vibrant.from(image).getPalette((err, palette) => {
         if (palette != undefined) {
             let paletteObj = {
-                songColor: palette.Vibrant.rgb,
+                borderColor: palette.Vibrant.rgb,
                 tlShadowColor: palette.DarkVibrant.rgb,
-                borderColor: palette.LightVibrant.rgb,
+                songColor: palette.LightVibrant.rgb,
                 brShadowColor: palette.DarkMuted.rgb,
                 artistColor: palette.LightMuted.rgb
             };
