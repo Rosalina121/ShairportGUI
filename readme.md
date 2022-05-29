@@ -24,12 +24,12 @@ This project is inspired by [Shairport Sync Metadata Display](https://github.com
 ## Run
 ```
 $ npm install
-$ node index.js
+$ npm start
 ```
 
 ## Notes
-This project was build with Raspberry Pi Zero W in mind. While the server part works well on the Pi, the web part is somewhat sluggish, but works well on another computers on the LAN. Also because of this you'll find commented code that *will* work, just not so well on Pi (so animations, some CSS properties etc.). Also this hasn't been tested with many other resolutions than 1080p. there is no vertical mode (fixable with a `@media` query) and the scaling might not look that good on larger resolutions.
+This project was build with Raspberry Pi Zero W in mind. While the server part works well on the Pi, the web part is somewhat sluggish, but works well on another computers on the LAN. Also because of this you'll find commented code that *will* work, just not so well on Pi (so animations, some CSS properties etc.). Also this hasn't been tested with many other resolutions than 1080p. There is no vertical mode (fixable with a `@media` query) and the scaling might not look that good on larger resolutions.
 
 Also, the code probably could've been written more cleanly and overall better. Considering this project is still in progress some things may change for the better. Or worse if I become a feature creep.
 
-And yes, I know, move the css and js outside. I know, I tried, and I'm too lazy.
+~~And yes, I know, move the css and js outside. I know, I tried, and I'm too lazy.~~ Goddamit Jarek
