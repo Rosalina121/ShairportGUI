@@ -33,6 +33,9 @@ const saveBase64ImageToDisk = (data, fileName) => {
 const emitPalette = (image) => {
     palette = vibrant.from(image).getPalette((err, palette) => {
         if (!err) {
+            console.log('no error?');
+            console.log(palette);
+            console.log(err);
             let paletteObj = {
                 borderColor: palette.Vibrant.rgb,
                 tlShadowColor: palette.DarkVibrant.rgb,
