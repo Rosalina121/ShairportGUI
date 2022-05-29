@@ -74,13 +74,18 @@ pipeReader.on("PICT", function (pictureData) {
     console.log(pictureData);
     // pirctureData to base64
     let base64 = Buffer.from(pictureData).toString("base64");
-    // save to disk
-    saveBase64ImageToDisk(base64, "./image.png").then((fileName) => {
-        console.log(fileName);
-        // get palette
-        emitPalette(fileName);
-    });
-    io.emit("pictureData", base64);
+    // save to disk and emit palette
+    try {
+        saveBase64ImageToDisk(base64, "./image.png").then((fileName) => {
+            console.log(fileName);
+            // get palette
+            emitPalette(fileName);
+        });
+        io.emit("pictureData", base64);
+    } catch (err) {
+        console.log(err);
+    }
+    
 });
 
 app.use(express.static(__dirname + "/public"));
