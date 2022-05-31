@@ -4,6 +4,7 @@ A nice web interface for showing the shairport-sync metadata.
 
 ![Example - Translight by Breakbot](img/Screen1.png)
 ![Example - Myths You Forgot by Camellia and Toby Fox](img/Screen2.png)
+![Example - Glitch City by Garoad](img/Screen3.png)
 ## What did I use?
 Built using:
 * Node.js
