@@ -63,6 +63,7 @@ body {
   height: 750px;
   width: 750px;
   border-radius: 50%;
+  /* animation: spin 40s linear infinite; */
 }
 
 .thumbnail-border {
@@ -76,7 +77,6 @@ body {
     rgba(var(--brShadowColorForBoxShadow), 0.1) 0px 4px 20px,
     rgba(var(--brShadowColorForBoxShadow), 0.1) 0px 8px 24px,
     rgba(var(--tlShadowColorForBoxShadow), 0.4) 0px 16px 45px;
-  /* animation: spin 40s linear infinite; */
 }
 
 #song-details {
