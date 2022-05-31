@@ -42,7 +42,7 @@ body {
   background-size: cover;
   width: 100%;
   height: 100%;
-  filter: blur(30px);
+  filter: blur(70px);
 }
 
 #phone {
@@ -99,12 +99,12 @@ body {
 }
 
 .album-title {
-  font-size: 2rem;
+  font-size: 3rem;
   color: var(--borderColor);
 }
 
 .artist {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   color: var(--artistColor);
 }
 
