@@ -3,8 +3,8 @@
 :root {
   --brShadowColor: rgb(151, 0, 116);
   --tlShadowColor: rgb(0, 96, 126);
-  --brShadow: -3px 3px 7px rgba(var(--brShadowColorForBoxShadow), 0.3);
-  --tlShadow: 3px -3px 7px rgba(var(--tlShadowColorForBoxShadow), 0.3);
+  --brShadow: -3px 3px 7px rgba(var(--brShadowColorForBoxShadow), 0.35);
+  --tlShadow: 3px -3px 7px rgba(var(--tlShadowColorForBoxShadow), 0.35);
   --songColor: rgb(254, 1, 193);
   --artistColor: rgb(249, 212, 2);
   --borderColor: rgb(0, 194, 255);
