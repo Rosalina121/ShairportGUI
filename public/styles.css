@@ -3,11 +3,19 @@
 :root {
   --brShadowColor: rgb(151, 0, 116);
   --tlShadowColor: rgb(0, 96, 126);
-  --brShadow: -3px 3px 7px rgba(var(--brShadowColorForBoxShadow), 0.35);
-  --tlShadow: 3px -3px 7px rgba(var(--tlShadowColorForBoxShadow), 0.35);
   --songColor: rgb(254, 1, 193);
   --artistColor: rgb(249, 212, 2);
   --borderColor: rgb(0, 194, 255);
+
+  --brShadowColorRaw: 151, 0, 116;
+  --tlShadowColorRaw:0, 96, 126;
+  --songColorRaw: 254, 1, 193;
+  --artistColorRaw: 249, 212, 2;
+  --borderColorRaw: 0, 194, 255;
+
+  --brShadow: -3px 3px 7px rgba(var(--brShadowColorForBoxShadow), 0.35);
+  --tlShadow: 3px -3px 7px rgba(var(--tlShadowColorForBoxShadow), 0.35);
+
   --brShadowColorForBoxShadow: 255, 0, 255;
   --tlShadowColorForBoxShadow: 0, 255, 255;
 }
@@ -45,27 +53,27 @@ body {
   */
   radial-gradient(
       circle at left,
-      var(--borderColor),
+      rgba(var(--borderColorRaw), 1),
       rgba(255, 255, 255, 0) 50%
     ),
     radial-gradient(
       circle at top left,
-      var(--artistColor),
+      rgba(var(--artistColorRaw), 1),
       rgba(255, 255, 255, 0) 60%
     ),
     radial-gradient(
       circle at bottom,
-      var(--songColor),
+      rgba(var(--songColorRaw), 0.5),
       rgba(255, 255, 255, 0) 60%
     ),
     radial-gradient(
       circle at top right,
-      var(--tlShadowColor),
+      rgba(var(--tlShadowColorRaw), 1),
       rgba(255, 255, 255, 0) 60%
     ),
     radial-gradient(
       circle at bottom right,
-      var(--brShadowColor),
+      rgba(var(--brShadowColorRaw), 1),
       rgba(255, 255, 255, 0) 60%
     )
     ;
