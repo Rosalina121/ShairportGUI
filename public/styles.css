@@ -8,7 +8,7 @@
   --borderColor: rgb(0, 194, 255);
 
   --brShadowColorRaw: 151, 0, 116;
-  --tlShadowColorRaw:0, 96, 126;
+  --tlShadowColorRaw: 0, 96, 126;
   --songColorRaw: 254, 1, 193;
   --artistColorRaw: 249, 212, 2;
   --borderColorRaw: 0, 194, 255;
@@ -44,45 +44,36 @@ body {
   left: 0;
   z-index: 1;
   display: block;
+  /* Uncomment these for Image Background */
   /* background-image: url(http://test.palitechnika.com/Transgender_Pride_flag.png); */
+  /* backdrop-filter: blur(70px); */
+
+  /* Comment this to disable gradient background */
   background-image:
-  /* 
-     TODO: Analyze the colors returned by the JS and see which work the best 
-     Also, play with transparencies, might be worth a shot with overlapping gradients
-     And darkening the right-side gradients for even better text visibility
-  */
-  radial-gradient(
-      circle at left,
+    radial-gradient(circle at left,
       rgba(var(--borderColorRaw), 1),
-      rgba(255, 255, 255, 0) 50%
-    ),
-    radial-gradient(
-      circle at top left,
+      rgba(255, 255, 255, 0) 50%),
+    radial-gradient(circle at top left,
       rgba(var(--artistColorRaw), 0.4),
-      rgba(255, 255, 255, 0) 60%
-    ),
-    radial-gradient(
-      circle at bottom,
+      rgba(255, 255, 255, 0) 60%),
+    radial-gradient(circle at bottom,
       rgba(var(--songColorRaw), 0.3),
-      rgba(255, 255, 255, 0) 60%
-    ),
-    radial-gradient(
-      circle at top right,
+      rgba(255, 255, 255, 0) 60%),
+    radial-gradient(circle at top right,
       rgba(var(--tlShadowColorRaw), 1),
-      rgba(255, 255, 255, 0) 60%
-    ),
-    radial-gradient(
-      circle at bottom right,
+      rgba(255, 255, 255, 0) 60%),
+    radial-gradient(circle at bottom right,
       rgba(var(--brShadowColorRaw), 1),
-      rgba(255, 255, 255, 0) 60%
-    )
-    ;
+      rgba(255, 255, 255, 0) 60%);
+  /* Usually colors are very bright, somehow. This will darken them a bit. Comment if you don't like it
+     I use this with a TV and it's usually dark so this suits me better, but during the day brighter is fine too...
+     Maybe I'll throw in some JS to check the sun and adjust brightness accordingly */
+  filter: brightness(0.8);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   width: 100%;
   height: 100%;
-  /* backdrop-filter: blur(70px); */
 }
 
 #phone {
