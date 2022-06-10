@@ -58,12 +58,12 @@ body {
     ),
     radial-gradient(
       circle at top left,
-      rgba(var(--artistColorRaw), 1),
+      rgba(var(--artistColorRaw), 0.4),
       rgba(255, 255, 255, 0) 60%
     ),
     radial-gradient(
       circle at bottom,
-      rgba(var(--songColorRaw), 0.5),
+      rgba(var(--songColorRaw), 0.3),
       rgba(255, 255, 255, 0) 60%
     ),
     radial-gradient(
@@ -82,7 +82,7 @@ body {
   background-size: cover;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(70px);
+  /* backdrop-filter: blur(70px); */
 }
 
 #phone {
