@@ -13,7 +13,7 @@
 }
 
 body {
-  background-color: #000000;
+  background-color: var(--brShadowColor);
   font-family: 'Public Sans', sans-serif;
   color: var(--songColor);
   overflow: hidden;
@@ -36,7 +36,34 @@ body {
   left: 0;
   z-index: 1;
   display: block;
-  background-image: url(http://test.palitechnika.com/Transgender_Pride_flag.png);
+  /* background-image: url(http://test.palitechnika.com/Transgender_Pride_flag.png); */
+  background-image:
+  radial-gradient(
+      circle at left,
+      var(--borderColor),
+      rgba(255, 255, 255, 0) 30%
+    ),
+    radial-gradient(
+      circle at top left,
+      var(--artistColor),
+      rgba(255, 255, 255, 0) 60%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      var(--songColor),
+      rgba(255, 255, 255, 0) 60%
+    ),
+    radial-gradient(
+      circle at top right,
+      var(--tlShadowColor),
+      rgba(255, 255, 255, 0) 60%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      var(--brShadowColor),
+      rgba(255, 255, 255, 0) 60%
+    )
+    ;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

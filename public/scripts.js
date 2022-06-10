@@ -31,8 +31,8 @@ socket.on('pictureData', function (pictureData) {
     let bgImg = document.getElementsByClassName('background-img')[0]
     img.src = `data:image/png;base64,` + pictureData
     console.log('cover picture set!')
-    bgImg.style.backgroundImage = `url(data:image/png;base64,${pictureData})`
-    console.log('background picture set!')
+    // bgImg.style.backgroundImage = `url(data:image/png;base64,${pictureData})`
+    // console.log('background picture set!')
 })
 
 socket.on('palette', function (palette) {
