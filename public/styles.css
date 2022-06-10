@@ -35,7 +35,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 
 .background-img {
@@ -76,18 +76,7 @@ body {
   height: 100%;
 }
 
-.phone {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  background-color: rgba(255, 255, 255, 0.5);
-  background: none;
-  height: 90vh;
-  width: 90%;
-  padding: 2-px;
-  border-radius: 25px;
-}
+
 
 .song-thumbnail {
   height: 750px;
