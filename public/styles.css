@@ -54,7 +54,7 @@ body {
       rgba(255, 255, 255, 0) 60%
     ),
     radial-gradient(
-      circle at bottom left,
+      circle at bottom,
       var(--songColor),
       rgba(255, 255, 255, 0) 60%
     ),
