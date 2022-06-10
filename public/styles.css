@@ -104,6 +104,7 @@ body {
   white-space: normal;
   text-shadow: var(--brShadow), var(--tlShadow);
   overflow: visible;
+  width: 30%;   /* Hardcoded width cause text move the thumbnail away */
 }
 
 .song-title {
