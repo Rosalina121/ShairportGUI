@@ -18,27 +18,27 @@ const applyPallette = (palette) => {
 };
 
 var socket = io();
-socket.on("metadata", function (metadata) {
-    let title = document.getElementById("title");
-    let album = document.getElementById("album");
-    let artist = document.getElementById("artist");
+socket.on("metadata", (metadata) => {
+    let title = document.querySelector("#title");
+    let album = document.querySelector("#album");
+    let artist = document.querySelector("#artist");
     title.textContent = metadata.title;
     album.textContent = metadata.album;
     artist.textContent = metadata.artist;
     console.log("data get!");
 });
 
-socket.on("pictureData", function (pictureData) {
+socket.on("pictureData", (pictureData) => {
     console.log("picture get!");
-    let img = document.getElementById("cover");
-    let bgImg = document.getElementsByClassName("background-img")[0];
+    let img = document.querySelector("#cover");
+    // let bgImg = document.querySelector(".background-img")[0];
     img.src = `data:image/png;base64,` + pictureData;
     console.log("cover picture set!");
     // bgImg.style.backgroundImage = `url(data:image/png;base64,${pictureData})`
     // console.log('background picture set!')
 });
 
-socket.on("palette", function (palette) {
+socket.on("palette", (palette) => {
     console.log("palette get!");
     applyPallette(palette);
     console.log("palette set!");
