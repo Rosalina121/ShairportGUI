@@ -110,7 +110,6 @@ body {
 .song-title {
   font-size: 6rem;
   font-weight: bolder;
-  /* add 1rem padding on top and bottom */
 }
 
 .album-title {
