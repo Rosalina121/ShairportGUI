@@ -90,10 +90,10 @@ body {
   border-radius: 50%;
   padding: 0.4rem;
   background-color: var(--borderColor);
-  box-shadow: inset 6px 6px 20px 0 rgba(var(--brShadowColorForBoxShadow), 0.2),
-    rgba(var(--brShadowColorForBoxShadow), 0.1) 0px 4px 20px,
-    rgba(var(--brShadowColorForBoxShadow), 0.1) 0px 8px 24px,
-    rgba(var(--tlShadowColorForBoxShadow), 0.4) 0px 16px 45px;
+  box-shadow: inset 6px 6px  20px 0 rgba(var(--brShadowColorForBoxShadow), 0.2),
+                    0px 4px  20px   rgba(var(--brShadowColorForBoxShadow), 0.1),
+                    0px 8px  24px   rgba(var(--brShadowColorForBoxShadow), 0.1),
+                    0px 16px 45px   rgba(var(--tlShadowColorForBoxShadow), 0.4);
 }
 
 .song-details {
