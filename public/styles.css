@@ -76,12 +76,11 @@ body {
   height: 100%;
 }
 
-#phone {
+.phone {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  /* gap: 10%; commented coz doesn't work on chromium pi*/
+  justify-content: space-around;
   background-color: rgba(255, 255, 255, 0.5);
   background: none;
   height: 90vh;
@@ -110,16 +109,12 @@ body {
     rgba(var(--tlShadowColorForBoxShadow), 0.4) 0px 16px 45px;
 }
 
-#song-details {
-  /* margin-top: 5%; */
+.song-details {
   display: flex;
   flex-direction: column;
-  width: 30%;
-  /* align-items: center; */
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: normal;
-  padding-left: 10%;
   text-shadow: var(--brShadow), var(--tlShadow);
   overflow: visible;
 }

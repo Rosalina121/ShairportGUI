@@ -32,6 +32,7 @@ const saveBase64ImageToDisk = (data, fileName) => {
 
 const emitPalette = (image) => {
     palette = vibrant.from(image).getPalette((err, palette) => {
+        // TODO: Add actual error handling
         if (!err) {
             console.log('no error?');
             console.log(palette);
@@ -45,6 +46,8 @@ const emitPalette = (image) => {
             };
             console.log(paletteObj);
             io.emit("palette", paletteObj);
+        } else {
+            console.log(err);
         }
     });
 };
