@@ -13,8 +13,8 @@
   --artistColorRaw: 249, 212, 2;
   --borderColorRaw: 0, 194, 255;
 
-  --brShadow: -3px 3px 7px rgba(var(--brShadowColorForBoxShadow), 0.35);
-  --tlShadow: 3px -3px 7px rgba(var(--tlShadowColorForBoxShadow), 0.35);
+  --brShadow: -3px 3px 7px rgba(var(--brShadowColorForBoxShadow), 0.5);
+  --tlShadow: 3px -3px 7px rgba(var(--tlShadowColorForBoxShadow), 0.5);
 
   --brShadowColorForBoxShadow: 255, 0, 255;
   --tlShadowColorForBoxShadow: 0, 255, 255;
@@ -76,8 +76,6 @@ body {
   height: 100%;
 }
 
-
-
 .song-thumbnail {
   height: 750px;
   width: 750px;
@@ -109,18 +107,23 @@ body {
 }
 
 .song-title {
-  font-size: 5rem;
+  font-size: 6rem;
   font-weight: bolder;
+  /* add 1rem padding on top and bottom */
 }
 
 .album-title {
   font-size: 3rem;
   color: var(--artistColor);
+  padding-top: 6rem;
+  font-weight: 600;
 }
 
 .artist {
   font-size: 3.5rem;
   color: var(--artistColor);
+  padding-top: 1.5rem;
+  font-weight: 600;
 }
 
 @keyframes spin {
