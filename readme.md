@@ -5,8 +5,8 @@ A nice web interface for showing the shairport-sync metadata.
 <table>
   <thead>
     <tr>
-      <th>Horizontal (Gradient and Blurred Image)</th>
-      <th>Vertical (BlurHash)</th>
+      <th>Horizontal (Static Gradient and Blurred Image)</th>
+      <th>Vertical (BlurHash, believe me, it moves)</th>
     </tr>
   </thead>
   <tbody>
