@@ -20,6 +20,16 @@
   --tlShadowColorForBoxShadow: 0, 255, 255;
 }
 
+/* change flex direction to column on mobile */
+@media (max-width: 1444px) {
+  .container {
+    flex-direction: column !important;
+  }
+  .song-details {
+    width: auto !important;
+  }
+}
+
 body {
   background-color: var(--brShadowColor);
   font-family: 'Public Sans', sans-serif;
