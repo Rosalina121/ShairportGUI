@@ -35,7 +35,7 @@ Built using:
 -   socket.io
 -   [node-vibrant](https://www.npmjs.com/package/node-vibrant)
 -   GitHub Copilot (because I'm learning Node)
--   parts of CSS from [neumorphism, pure css](https://codepen.io/b-r-y/pen/wvrXdEd) by Bryanna Lucyk
+-   parts of CSS from [neumorphism, pure css](https://codepen.io/b-r-y/pen/wvrXdEd) by Bryanna Lucyk (though after some refactorings I mainly use the neumorphic drop-shadows)
 -   the mighty power of `F L E X B O X`
 
 This project is inspired by [Shairport Sync Metadata Display](https://github.com/AlainGourves/shairport-metadata-display) and works similarly, but without any fancy transitions. And has less features ofc.
