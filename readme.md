@@ -59,6 +59,7 @@ $ npm start
     -   I have to get to the bottom of this though. Goodbye Moonmen on Apple Music always triggers the crash. Perhaps it's jpg instead of png?
 
 ## Backgrounds
+### Styles
 As of now I'm playing with different styles of background. Now, there are 3 styles:
 * Blurred Image
 * Static Gradient based off album cover image palette
@@ -66,17 +67,17 @@ As of now I'm playing with different styles of background. Now, there are 3 styl
 
 Default is **Static Gradient** for reasons below, but feel free to change it ofc.
 
+### Pros and Cons, objectively
 * Blurred image will make text illegible on many backgrounds, unless you want to make the white-on-black impact meme font your default.
 * Gradient based off the palette has to wait for the palette to be sent, but makes the text readble from distance in 99% cases
 * BlurHash is fast, but not on super-low-end systems like Pi Zero (chromium just hangs). Also makes moving the blur Apple Music style easier
 
-Some subjective pros and cons:
-
+### Proc and Cons, imo
 * Blurred image will look... wierd to say the least on images with large text (think NCS covers)
 * Gradient looks nice and all, but could've be done cleverer. Making it dynamic and moving around would require some tinkering or layering of divs so I'm thinking of a better approach.
 * BlurHash is fast, is nice, but it's designed for thumbnail placeholders. Sometimes it will get you a great background, other times it will look bright even for pitch-black covers. Also it's client side so my Pi Zero just refuses to run the webpage.
 
-To use either background:
+### Usage
 * Static Gradient is default
 * Blurred Image uncomment lines in `styles.css` and `scripts.js`
 * BlurHash Gradient uncomment lines in `styles.css`, `scripts.js` and `index.html` (functions, animations and imports)
