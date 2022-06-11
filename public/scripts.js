@@ -43,3 +43,31 @@ socket.on("palette", (palette) => {
     applyPallette(palette);
     console.log("palette set!");
 });
+
+// blur image
+const imgContainer = document.querySelector(".background-img");
+const img = new Image();
+img.crossOrigin = "Anonymous";
+img.onload = () => {
+    // imgContainer.appendChild(img);
+    const imgData = blurhash.getImageData(img);
+
+    blurhash
+        .encodePromise(imgData, img.width, img.height, 4, 4)
+        .then((hash) => {
+            return blurhash.decodePromise(hash, img.width, img.height);
+        })
+        .then((blurhashImgData) => {
+
+            // as image object with promise
+            return blurhash.getImageDataAsImageWithOnloadPromise(
+                blurhashImgData,
+                img.width,
+                img.height
+            );
+        })
+        .then((imgObject) => {
+            imgContainer.style.backgroundImage = `url(${imgObject.src})`;
+        });
+};
+img.src = document.querySelector("#cover").src;

@@ -59,7 +59,7 @@ body {
   /* backdrop-filter: blur(70px); */
 
   /* Comment this to disable gradient background */
-  background-image:
+  /* background-image:
     radial-gradient(circle at left,
       rgba(var(--borderColorRaw), 1),
       rgba(255, 255, 255, 0) 50%),
@@ -74,7 +74,7 @@ body {
       rgba(255, 255, 255, 0) 60%),
     radial-gradient(circle at bottom right,
       rgba(var(--brShadowColorRaw), 1),
-      rgba(255, 255, 255, 0) 60%);
+      rgba(255, 255, 255, 0) 60%); */
   /* Usually colors are very bright, somehow. This will darken them a bit. Comment if you don't like it
      I use this with a TV and it's usually dark so this suits me better, but during the day brighter is fine too...
      Maybe I'll throw in some JS to check the sun and adjust brightness accordingly */
@@ -84,7 +84,16 @@ body {
   background-size: cover;
   width: 100%;
   height: 100%;
+  animation: colorChange 5s infinite alternate;
+
 }
+
+@keyframes colorChange {
+  to {
+    background-position:top left;
+  }
+ }
+
 
 .song-thumbnail {
   height: 750px;
