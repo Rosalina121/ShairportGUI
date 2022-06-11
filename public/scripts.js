@@ -34,6 +34,7 @@ socket.on("pictureData", (pictureData) => {
     // let bgImg = document.querySelector(".background-img")[0];
     img.src = `data:image/png;base64,` + pictureData;
     console.log("cover picture set!");
+    // comment this to disable blur
     blurImage();
     console.log("blur image set!");
     // bgImg.style.backgroundImage = `url(data:image/png;base64,${pictureData})`
@@ -45,6 +46,8 @@ socket.on("palette", (palette) => {
     applyPallette(palette);
     console.log("palette set!");
 });
+
+
 
 // blur image
 const blurImage = () => {
@@ -73,3 +76,4 @@ const blurImage = () => {
     };
     img.src = document.querySelector("#cover").src;
 };
+blurImage();
