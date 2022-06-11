@@ -31,12 +31,14 @@ socket.on("metadata", (metadata) => {
 socket.on("pictureData", (pictureData) => {
     console.log("picture get!");
     let img = document.querySelector("#cover");
+    // uncomment for Blurred Image
     // let bgImg = document.querySelector(".background-img")[0];
     img.src = `data:image/png;base64,` + pictureData;
     console.log("cover picture set!");
-    // comment this to disable blur
-    blurImage();
+    // uncomment this to enable BlurHash
+    // blurImage();
     console.log("blur image set!");
+    // uncomment for Blurred Image
     // bgImg.style.backgroundImage = `url(data:image/png;base64,${pictureData})`
     // console.log('background picture set!')
 });
@@ -76,4 +78,5 @@ const blurImage = () => {
     };
     img.src = document.querySelector("#cover").src;
 };
-blurImage();
+// uncomment for BlurHash
+// blurImage();
