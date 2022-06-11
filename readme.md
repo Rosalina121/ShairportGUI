@@ -84,8 +84,6 @@ Default is **Static Gradient** for reasons below, but feel free to change it ofc
 
 ## Notes
 
-First of all, if you'd like to use the blurred image background, you have to uncomment marked lines in the `styles.css` and `scripts.js` files. Default is gradient as the text is more readable.
-
 This project was build with Raspberry Pi Zero W in mind. While the server part works well on the Pi, the web part is somewhat sluggish, but works well on another computers on the LAN. Also because of this you'll find commented code that _will_ work, just not so well on Pi (so animations, some CSS properties etc.). Also this hasn't been tested with many other resolutions than 1080p. The album art is hardcoded at 750px x 750px, so this might not look good enough on larger screens/scales (easily fixable though). Also the `@media` query for smaller screens is at 1444px which might also not work well for your current setup.
 
 Also, the code probably could've been written more cleanly and overall better. Considering this project is still in progress some things may change for the better. Or worse if I become a feature creep.
