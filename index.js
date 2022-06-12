@@ -27,10 +27,12 @@ ws281x.init(NUM_LEDS);  // comment to disable LEDs
 const changeStripColor = (color) => {
     // set LED brightness to max
     ws281x.setBrightness(255);
+    console.log("brightness set");
     // set all LEDs to the color
     for (let i = 0; i < NUM_LEDS; i++) {
         pixelData[i] = color;
     }
+    console.log("color set");
     ws281x.render(pixelData);
 }
 
@@ -62,7 +64,7 @@ const emitPalette = (image) => {
             };
             console.log(paletteObj);
             io.emit("palette", paletteObj);
-            changeStripColor(paletteObj.borderColor);   // Comment to disable LEDs
+            changeStripColor(0xe11bf7);   // Comment to disable LEDs
         } else {
             console.error(err);
         }
