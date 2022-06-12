@@ -6,7 +6,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const vibrant = require("node-vibrant");
 const fs = require("fs");
-const ws281x = require("rpi-ws281x-native");
+// const ws281x = require("rpi-ws281x-native");
 
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -20,21 +20,21 @@ const io = new Server(server, {
 });
 
 // ws281x stuff
-const NUM_LEDS = 30;    // change to your LED amount
-const pixelData = new Uint32Array(NUM_LEDS);
-ws281x.init(NUM_LEDS);  // comment to disable LEDs
+// const NUM_LEDS = 30;    // change to your LED amount
+// const pixelData = new Uint32Array(NUM_LEDS);
+// ws281x.init(NUM_LEDS);  // comment to disable LEDs
 
-const changeStripColor = (color) => {
-    // set LED brightness to max
-    ws281x.setBrightness(255);
-    console.log("brightness set");
-    // set all LEDs to the color
-    for (let i = 0; i < NUM_LEDS; i++) {
-        pixelData[i] = color;
-    }
-    console.log("color set");
-    ws281x.render(pixelData);
-}
+// const changeStripColor = (color) => {
+//     // set LED brightness to max
+//     ws281x.setBrightness(255);
+//     console.log("brightness set");
+//     // set all LEDs to the color
+//     for (let i = 0; i < NUM_LEDS; i++) {
+//         pixelData[i] = color;
+//     }
+//     console.log("color set");
+//     ws281x.render(pixelData);
+// }
 
 const saveBase64ImageToDisk = (data, fileName) => {
     return new Promise((resolve, reject) => {
@@ -64,7 +64,7 @@ const emitPalette = (image) => {
             };
             console.log(paletteObj);
             io.emit("palette", paletteObj);
-            changeStripColor(0xe11bf7);   // Comment to disable LEDs
+            // changeStripColor(0xe11bf7);   // Comment to disable LEDs
         } else {
             console.error(err);
         }
