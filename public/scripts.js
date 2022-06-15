@@ -57,11 +57,14 @@ const toggleBackgroundType = () => {
     const backgroundType = getBackgroundType();
     if (backgroundType === "image") {
         changeStyle("blur");
+        console.log("background type set to blur");
     } else if (backgroundType === "blur") {
         changeStyle("blurHash");
+        console.log("background type set to blurHash");
     }
     else if (backgroundType === "blurHash") {
         changeStyle("image");
+        console.log("background type set to image");
     }
 }
 
