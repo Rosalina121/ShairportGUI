@@ -1,5 +1,6 @@
 const SongProvider = require("./SongProvider");
 const ShairportReader = require("shairport-sync-reader");
+const { emitSongMeta, emitSongCover } = require("./utils");
 
 class ShairportProvider extends SongProvider {
     constructor(path) {
