@@ -49,8 +49,6 @@ socket.on("palette", (palette) => {
     console.log("palette set!");
 });
 
-
-
 // blur image
 const blurImage = () => {
     const imgContainer = document.querySelector(".background-img");

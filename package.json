@@ -2,10 +2,10 @@
     "name": "shairportgui",
     "version": "1.0.0",
     "description": "Web-based GUI server (lol) for shairport-sync",
-    "main": "index.js",
+    "main": "src/index.js",
     "scripts": {
-        "startPi": "./replace.sh && node index.js",
-        "start": "node index.js",
+        "startPi": "./replace.sh && node src/index.js",
+        "start": "node src/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -21,8 +21,10 @@
     "dependencies": {
         "express": "^4.18.1",
         "node-vibrant": "^3.2.1-alpha.1",
+        "request": "^2.88.2",
         "shairport-sync-reader": "^0.0.9",
-        "socket.io": "^4.5.0"
+        "socket.io": "^4.5.0",
+        "spotify-web-api-node": "^5.0.2"
     },
     "devDependencies": {
         "prettier": "2.6.2"
