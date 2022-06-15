@@ -39,7 +39,7 @@ Built using:
 -   [Dens49's port](https://github.com/Dens49/blurhash-js) of [blurhash](https://blurha.sh/) to ES6
 -   the mighty power of `F L E X B O X`
 
-This project is inspired by [Shairport Sync Metadata Display](https://github.com/AlainGourves/shairport-metadata-display) and works similarly, but without any fancy transitions. And has less features ofc.
+This project is inspired by [Shairport Sync Metadata Display](https://github.com/AlainGourves/shairport-metadata-display) and works similarly, but without any fancy transitions. And has less features ofc (though one might argue if fancy looks are better than music controls).
 
 ## Prerequisites
 
