@@ -155,7 +155,7 @@ const updateBackground = (backgroundType, pictureData) => {
             updateBackgroundBlurHash();
             break;
         default:
-            updateBackgroundImage(pictureData);
+            // basically blur, do nothing as blur uses palette colors
             break;
     }
 };
