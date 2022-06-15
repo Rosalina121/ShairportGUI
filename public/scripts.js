@@ -146,7 +146,7 @@ const updateBackground = (backgroundType, pictureData) => {
             updateBackgroundImage(pictureData);
             break;
         case "blurHash":
-            updateBackgroundBlurHash(pictureData);
+            updateBackgroundBlurHash();
             break;
         default:
             updateBackgroundImage(pictureData);
@@ -159,10 +159,10 @@ const updateBackgroundImage = (pictureData) => {
     console.log("background picture set!");
 };
 
-const updateBackgroundBlurHash = (pictureData) => {
+const updateBackgroundBlurHash = () => {
+    resetStyle();   // will this work?
     blurImage();
     console.log("blur image set!");
-    blurImage();    // will this work?
 };
 
 let socket = io();
