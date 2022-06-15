@@ -161,6 +161,10 @@ const updateBackground = (backgroundType, pictureData) => {
 
 const updateBackgroundImage = (pictureData) => {
     imgContainer.style.backgroundImage = `url(data:image/png;base64,${pictureData})`;
+    // fot initial load
+    if (imgContainer.style.filter === "") {
+        imgContainer.style.filter = "blur(70px)";
+    }
     console.log("background picture set!");
 };
 
