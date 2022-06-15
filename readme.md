@@ -57,6 +57,7 @@ $ npm start
 
 -   Sometimes, in very specific cases, the palette will be undefined and the app will crash. I will somehow handle this case in the future, but for now I recommend running it with a utility like [forever](https://www.npmjs.com/package/forever).
     -   I have to get to the bottom of this though. Goodbye Moonmen on Apple Music always triggers the crash. Perhaps it's jpg instead of png?
+-   BlurHash will not properly blur the image once it's emitted, works only once during startup or if manually changed. Not sure here. Will debug it.
 
 ## Backgrounds
 ### Styles
@@ -79,8 +80,10 @@ Default is Static Gradient but you can change the currently used type by **click
 * 
 ## Notes
 
-This project was build with Raspberry Pi Zero W in mind. But is no longer. I decided that it's too much for a little poor Pi Zero to handle both a server and Chromium so if you want to tun it on Pi just disable animations and blurHash.
+This project was build with Raspberry Pi Zero W in mind. But is no longer. I decided that it's too much for a little poor Pi Zero to handle both a server and Chromium so if you want to run it on Pi just disable animations and blurHash.
 
 Also, the code probably could've been written more cleanly and overall better. Considering this project is still in progress some things may change for the better. Or worse if I become a feature creep.
 
 ~~And yes, I know, move the css and js outside. I know, I tried, and I'm too lazy.~~ Goddamit Jarek
+
+As for todo's, I guess a tiny notification what background mode is selected, as in some cases they might be indistinguishable from each other.
