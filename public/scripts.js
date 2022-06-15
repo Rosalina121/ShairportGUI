@@ -40,14 +40,16 @@ const processTypes = (backgroundType) => {
 };
 
 const onInit = () => {
-    const backgroundType = getBackgroundType();
+    backgroundType = getBackgroundType();
     processTypes(backgroundType);
 };
 
-const changeStyle = (backgroundType) => {
+const changeStyle = (backgroundTypeVar) => {
     resetStyle();
-    processTypes(backgroundType);
-    saveBackgroundType(backgroundType);
+    processTypes(backgroundTypeVar);
+    saveBackgroundType(backgroundTypeVar);
+    backgroundType = backgroundTypeVar;
+
 };
 
 // toggle background styles between image, blur and blurHash
