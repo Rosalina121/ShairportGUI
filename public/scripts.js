@@ -121,7 +121,6 @@ const blurImage = () => {
     img.crossOrigin = "Anonymous";
     img.onload = () => {
         const imgData = blurhash.getImageData(img);
-
         blurhash
             .encodePromise(imgData, img.width, img.height, 4, 4)
             .then((hash) => {
@@ -164,6 +163,7 @@ const updateBackgroundImage = (pictureData) => {
 const updateBackgroundBlurHash = (pictureData) => {
     blurImage();
     console.log("blur image set!");
+    blurImage();    // will this work?
 };
 
 let socket = io();
