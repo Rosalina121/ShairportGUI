@@ -160,8 +160,7 @@ const updateBackgroundImage = (pictureData) => {
 };
 
 const updateBackgroundBlurHash = () => {
-    resetStyle();   // will this work?
-    blurImage();
+    changeStyle("blurHash");    // maybe this?
     console.log("blur image set!");
 };
 
