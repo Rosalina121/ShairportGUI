@@ -17,7 +17,7 @@
   --tlShadow: 3px -3px 7px rgba(var(--tlShadowColorRaw), 0.5);
 }
 
-/* change flex direction to column on mobile */
+/* change flex direction to column on portrait, adjust for needs */
 @media (max-width: 1200px) {
   .container {
     flex-direction: column !important;
@@ -27,7 +27,8 @@
     width: auto !important;
   }
   .thumbnail-border {
-    width: 70% !important;
+    width: 70vw !important;
+    height: 70vw !important;
   }
   .song-title {
     font-size: 12vw !important;
@@ -71,8 +72,6 @@ body {
   background-size: cover;
   width: 100%;
   height: 100%;
-  /* Uncomment for BlurHash on systems better than Pi Zero */
-  /* animation: positionChange 7s infinite alternate; */
 }
 
 @keyframes positionChange {
@@ -91,7 +90,8 @@ body {
 
 .thumbnail-border {
   display: flex;
-  width: 40%;
+  width: 40vw;
+  height: 40vw;
   border-radius: 50%;
   padding: 0.4rem;
   background-color: var(--borderColor);
