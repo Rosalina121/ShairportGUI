@@ -31,7 +31,6 @@ const processTypes = (backgroundType) => {
             break;
         case "blurHash":
             setBackgroundBlurHash();
-            blurImage();
             break;
         default:
             setBackgroundImage();
@@ -103,6 +102,8 @@ const setBackgroundBlur = () => {
 
 const setBackgroundBlurHash = () => {
     imgContainer.style.animation = "positionChange 7s infinite alternate";
+    imgContainer.style.filter = "saturate(1.5)";
+    blurImage();
 };
 
 // get background type (either image, blur or blurHash) from browser local storage
