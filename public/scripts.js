@@ -116,7 +116,6 @@ const saveBackgroundType = (backgroundType) => {
 
 // blur image
 const blurImage = () => {
-    const imgContainer = document.querySelector(".background-img");
     const img = new Image();
     img.crossOrigin = "Anonymous";
     img.onload = () => {

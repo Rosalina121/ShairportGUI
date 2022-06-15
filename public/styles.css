@@ -18,13 +18,27 @@
 }
 
 /* change flex direction to column on mobile */
-@media (max-width: 1444px) {
+@media (max-width: 1200px) {
   .container {
     flex-direction: column !important;
   }
 
   .song-details {
     width: auto !important;
+  }
+  .thumbnail-border {
+    width: 70% !important;
+  }
+  .song-title {
+    font-size: 12vw !important;
+  }
+  
+  .album-title {
+    font-size: 6vw !important;
+  }
+  
+  .artist {
+    font-size: 7vw !important;
   }
 }
 
@@ -69,16 +83,15 @@ body {
 
 
 .song-thumbnail {
-  height: 750px;
-  width: 750px;
+  height: 100%;
+  width: 100%;
   border-radius: 50%;
   animation: spin 40s linear infinite;
 }
 
 .thumbnail-border {
   display: flex;
-  height: 750px;
-  width: 750px;
+  width: 40%;
   border-radius: 50%;
   padding: 0.4rem;
   background-color: var(--borderColor);
@@ -101,19 +114,19 @@ body {
 }
 
 .song-title {
-  font-size: 6rem;
+  font-size: 4.5vw;
   font-weight: bolder;
 }
 
 .album-title {
-  font-size: 3rem;
+  font-size: 2.2vw;
   color: var(--artistColor);
   padding-top: 6rem;
   font-weight: 600;
 }
 
 .artist {
-  font-size: 3.5rem;
+  font-size: 2.8vw;
   color: var(--artistColor);
   padding-top: 1.5rem;
   font-weight: 600;
