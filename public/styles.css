@@ -26,18 +26,20 @@
   .song-details {
     width: auto !important;
   }
+
   .thumbnail-border {
-    width: 70vw !important;
+    width:  70vw !important;
     height: 70vw !important;
   }
+
   .song-title {
     font-size: 12vw !important;
   }
-  
+
   .album-title {
     font-size: 6vw !important;
   }
-  
+
   .artist {
     font-size: 7vw !important;
   }
@@ -79,7 +81,6 @@ body {
     background-position: top left;
   }
 }
-
 
 .song-thumbnail {
   height: 100%;

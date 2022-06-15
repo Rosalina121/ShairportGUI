@@ -48,7 +48,6 @@ const changeStyle = (backgroundTypeVar) => {
     processTypes(backgroundTypeVar);
     saveBackgroundType(backgroundTypeVar);
     backgroundType = backgroundTypeVar;
-
 };
 
 // toggle background styles between image, blur and blurHash
@@ -60,13 +59,11 @@ const toggleBackgroundType = () => {
     } else if (backgroundType === "blur") {
         changeStyle("blurHash");
         console.log("background type set to blurHash");
-    }
-    else if (backgroundType === "blurHash") {
+    } else if (backgroundType === "blurHash") {
         changeStyle("image");
         console.log("background type set to image");
     }
-}
-
+};
 
 const resetStyle = () => {
     imgContainer.style.backgroundImage = "";
@@ -170,7 +167,7 @@ const updateBackgroundImage = (pictureData) => {
 };
 
 const updateBackgroundBlurHash = () => {
-    changeStyle("blurHash");    // maybe this?
+    changeStyle("blurHash");
     console.log("blur image set!");
 };
 
@@ -192,8 +189,6 @@ socket.on("pictureData", (pictureData) => {
     console.log("cover picture set!");
     updateBackground(backgroundType, pictureData);
 });
-
-
 
 socket.on("palette", (palette) => {
     console.log("palette get!");
