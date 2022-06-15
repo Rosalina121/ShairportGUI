@@ -76,12 +76,7 @@ Default is Static Gradient but you can change the currently used type by **click
 * Blurred image will look... wierd to say the least on images with large text (think NCS covers)
 * Gradient looks nice and all, but could've be done cleverer. Making it dynamic and moving around would require some tinkering or layering of divs so I'm thinking of a better approach.
 * BlurHash is fast, is nice, but it's designed for thumbnail placeholders. Sometimes it will get you a great background, other times it will look bright even for pitch-black covers. Also it's client side so my Pi Zero just refuses to run the webpage.
-
-### Usage
-* Static Gradient is default
-* Blurred Image uncomment lines in `styles.css` and `scripts.js`
-* BlurHash Gradient uncomment lines in `styles.css`, `scripts.js` and `index.html` (functions, animations and imports)
-
+* 
 ## Notes
 
 This project was build with Raspberry Pi Zero W in mind. But is no longer. I decided that it's too much for a little poor Pi Zero to handle both a server and Chromium so if you want to tun it on Pi just disable animations and blurHash.
