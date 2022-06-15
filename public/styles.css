@@ -1,23 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Khula:wght@400;600;700&family=Public+Sans:wght@100;300;400;600&display=swap');
 
 :root {
-  --brShadowColor: rgb(151, 0, 116);
-  --tlShadowColor: rgb(0, 96, 126);
-  --songColor: rgb(254, 1, 193);
-  --artistColor: rgb(249, 212, 2);
-  --borderColor: rgb(0, 194, 255);
-
   --brShadowColorRaw: 151, 0, 116;
   --tlShadowColorRaw: 0, 96, 126;
   --songColorRaw: 254, 1, 193;
   --artistColorRaw: 249, 212, 2;
   --borderColorRaw: 0, 194, 255;
 
-  --brShadow: -3px 3px 7px rgba(var(--brShadowColorForBoxShadow), 0.5);
-  --tlShadow: 3px -3px 7px rgba(var(--tlShadowColorForBoxShadow), 0.5);
+  --brShadowColor: rgb(var(--brShadowColorRaw));
+  --tlShadowColor: rgb(var(--tlShadowColorRaw));
+  --songColor: rgb(var(--songColorRaw));
+  --artistColor: rgb(var(--artistColorRaw));
+  --borderColor: rgb(var(--borderColorRaw));
 
-  --brShadowColorForBoxShadow: 255, 0, 255;
-  --tlShadowColorForBoxShadow: 0, 255, 255;
+  --brShadow: -3px 3px 7px rgba(var(--brShadowColorRaw), 0.5);
+  --tlShadow: 3px -3px 7px rgba(var(--tlShadowColorRaw), 0.5);
 }
 
 /* change flex direction to column on mobile */
@@ -25,6 +22,7 @@
   .container {
     flex-direction: column !important;
   }
+
   .song-details {
     width: auto !important;
   }
@@ -54,31 +52,6 @@ body {
   left: 0;
   z-index: 1;
   display: block;
-  /* Uncomment these for Blurred Image */
-  /* background-image: url(http://test.palitechnika.com/Transgender_Pride_flag.png); */
-  /* backdrop-filter: blur(70px); */
-
-  /* Gradient background based off the image's color palette */
-  background-image:
-    radial-gradient(circle at left,
-      rgba(var(--borderColorRaw), 1),
-      rgba(255, 255, 255, 0) 50%),
-    radial-gradient(circle at top left,
-      rgba(var(--artistColorRaw), 0.4),
-      rgba(255, 255, 255, 0) 60%),
-    radial-gradient(circle at bottom,
-      rgba(var(--songColorRaw), 0.3),
-      rgba(255, 255, 255, 0) 60%),
-    radial-gradient(circle at top right,
-      rgba(var(--tlShadowColorRaw), 1),
-      rgba(255, 255, 255, 0) 60%),
-    radial-gradient(circle at bottom right,
-      rgba(var(--brShadowColorRaw), 1),
-      rgba(255, 255, 255, 0) 60%);
-  /* Usually colors are very bright, somehow. This will darken them a bit. Comment if you don't like it
-     I use this with a TV and it's usually dark so this suits me better, but during the day brighter is fine too...
-     Maybe I'll throw in some JS to check the sun and adjust brightness accordingly */
-  filter: brightness(0.8);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -86,23 +59,20 @@ body {
   height: 100%;
   /* Uncomment for BlurHash on systems better than Pi Zero */
   /* animation: positionChange 7s infinite alternate; */
-
-
-
 }
 
 @keyframes positionChange {
   to {
-    background-position:top left;
+    background-position: top left;
   }
- }
+}
 
 
 .song-thumbnail {
   height: 750px;
   width: 750px;
   border-radius: 50%;
-  /* animation: spin 40s linear infinite; */
+  animation: spin 40s linear infinite;
 }
 
 .thumbnail-border {
@@ -112,10 +82,10 @@ body {
   border-radius: 50%;
   padding: 0.4rem;
   background-color: var(--borderColor);
-  box-shadow: inset 6px 6px  20px 0 rgba(var(--brShadowColorForBoxShadow), 0.2),
-                    0px 4px  20px   rgba(var(--brShadowColorForBoxShadow), 0.1),
-                    0px 8px  24px   rgba(var(--brShadowColorForBoxShadow), 0.1),
-                    0px 16px 45px   rgba(var(--tlShadowColorForBoxShadow), 0.4);
+  box-shadow: inset 6px 6px 20px 0 rgba(var(--brShadowColorRaw), 0.2),
+    0px 4px 20px rgba(var(--brShadowColorRaw), 0.1),
+    0px 8px 24px rgba(var(--brShadowColorRaw), 0.1),
+    0px 16px 45px rgba(var(--tlShadowColorRaw), 0.4);
 }
 
 .song-details {
@@ -126,7 +96,8 @@ body {
   white-space: normal;
   text-shadow: var(--brShadow), var(--tlShadow);
   overflow: visible;
-  width: 30%;   /* Hardcoded width cause text move the thumbnail away */
+  width: 30%;
+  /* Hardcoded width cause text move the thumbnail away */
 }
 
 .song-title {

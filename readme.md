@@ -65,11 +65,11 @@ As of now I'm playing with different styles of background. Now, there are 3 styl
 * Static Gradient based off album cover image palette
 * Moving Gradient generated with BlurHash
 
-Default is **Static Gradient** for reasons below, but feel free to change it ofc.
+Default is Static Gradient but you can change the currently used type by **clicking the album cover** (currently used type is saved in local storage).
 
 ### Pros and Cons, objectively
 * Blurred image will make text illegible on many backgrounds, unless you want to make the white-on-black impact meme font your default.
-* Gradient based off the palette has to wait for the palette to be sent, but makes the text readble from distance in 99% cases
+* Gradient based off the palette has to wait for the palette to be sent, but makes the text readable from distance in 99% cases
 * BlurHash is fast, but not on super-low-end systems like Pi Zero (chromium just hangs). Also makes moving the blur Apple Music style easier
 
 ### Proc and Cons, imo
@@ -84,7 +84,7 @@ Default is **Static Gradient** for reasons below, but feel free to change it ofc
 
 ## Notes
 
-This project was build with Raspberry Pi Zero W in mind. While the server part works well on the Pi, the web part is somewhat sluggish, but works well on another computers on the LAN. Also because of this you'll find commented code that _will_ work, just not so well on Pi (so animations, some CSS properties etc.). Also this hasn't been tested with many other resolutions than 1080p. The album art is hardcoded at 750px x 750px, so this might not look good enough on larger screens/scales (easily fixable though). Also the `@media` query for smaller screens is at 1444px which might also not work well for your current setup.
+This project was build with Raspberry Pi Zero W in mind. But is no longer. I decided that it's too much for a little poor Pi Zero to handle both a server and Chromium so if you want to tun it on Pi just disable animations and blurHash.
 
 Also, the code probably could've been written more cleanly and overall better. Considering this project is still in progress some things may change for the better. Or worse if I become a feature creep.
 
