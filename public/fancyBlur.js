@@ -26,6 +26,18 @@ const RGBToHSL = (r, g, b) => {
     ];
 };
 
+// Create PixiJS app
+const app = new PIXI.Application({
+    // render to <canvas class="orb-canvas"></canvas>
+    view: document.querySelector(".orb-canvas"),
+    // auto adjust size to fit the current window
+    resizeTo: window,
+    // transparent background, we will be creating a gradient background later using CSS
+    transparent: true
+});
+
+app.stage.filters = [new KawaseBlurFilter(70, 10, true)];
+
 // Create a new simplex noise instance
 const simplex = new SimplexNoise();
 
@@ -227,18 +239,6 @@ class ColorPalette {
 }
 
 export const startFancyBlur = (palette) => {
-    // Create PixiJS app
-    const app = new PIXI.Application({
-        // render to <canvas class="orb-canvas"></canvas>
-        view: document.querySelector(".orb-canvas"),
-        // auto adjust size to fit the current window
-        resizeTo: window,
-        // transparent background, we will be creating a gradient background later using CSS
-        transparent: true
-    });
-
-    app.stage.filters = [new KawaseBlurFilter(70, 10, true)];
-    
     console.log("startFancyBlur");
     document.querySelector(".background-img").style.display = "none";
     const colorPalette = new ColorPalette();
@@ -246,8 +246,10 @@ export const startFancyBlur = (palette) => {
 
     // Create orbs
     const orbs = [];
-
-    app.stage.removeChildren();
+    console.log('Children count: ' + stage.children.length)
+    for (var i = stage.children.length - 1; i >= 0; i--) {
+        stage.removeChild(stage.children[i]);
+    }
 
     for (let i = 0; i < 10; i++) {
         const orb = new Orb(colorPalette.randomColor());
