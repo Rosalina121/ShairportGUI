@@ -61,9 +61,11 @@ $ npm start
 ```
 
 ## Features
-### **⚠️ Spotify docs W.I.P. 🛠️**
 ### Playback
 Using the shairport-sync-reader you get track title, album, artist and an image. There's a whole lot more metadata available so you can easily add your own favorite info, but I didn't need that, so it's not used.
+### Spotify
+[ReadMe](docs/spotify.md)  
+`npm start -- spotify`
 ### Responsiveness
 Everything is written to fit many screen sizes, scales and both horizontal and vertical orientations. Now there are no hardcoded pixel sizes (maybe apart from `blur(70px)`).  
 The current `@media` query might not fit your needs though, but you can easily change it.
