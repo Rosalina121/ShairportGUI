@@ -245,16 +245,15 @@ export const startFancyBlur = (palette) => {
     const colorPalette = new ColorPalette();
     colorPalette.setPalette(palette);
 
-    app.ticker = new PIXI.Ticker();
+    // app.ticker = new PIXI.Ticker();
 
     // Create orbs
     const orbs = [];
-    console.log('Children count: ' + app.stage.children.length)
-    for (var i = app.stage.children.length - 1; i >= 0; i--) {
-        app.stage.removeChild(app.stage.children[i]);
+    console.log("Children count: " + app.stage.children.length);
+    while (app.stage.children[0]) {
+        app.stage.children[0].destroy();
     }
-    console.log('Children count after removal: ' + app.stage.children.length)
-
+    console.log("Children count after removal: " + app.stage.children.length);
 
     for (let i = 0; i < 10; i++) {
         const orb = new Orb(colorPalette.randomColor());
@@ -263,7 +262,7 @@ export const startFancyBlur = (palette) => {
 
         orbs.push(orb);
     }
-    console.log('Children count after new added: ' + app.stage.children.length)
+    console.log("Children count after new added: " + app.stage.children.length);
 
     // create app.ticker again
 
