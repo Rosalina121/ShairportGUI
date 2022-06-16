@@ -105,7 +105,7 @@ const setBackgroundBlur = () => {
       radial-gradient(circle at bottom right,
         rgba(var(--brShadowColorRaw), 1),
         rgba(255, 255, 255, 0) 60%)`;
-    imgContainer.style.filter = "brightness(0.8)";
+    // imgContainer.style.filter = "brightness(0.8)";
 };
 
 // get background type (either image, blur or blurHash) from browser local storage
