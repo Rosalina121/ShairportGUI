@@ -204,6 +204,17 @@ class ColorPalette {
         ];
     }
 
+    updateColorChoices() {
+        this.baseColor = this.palette.songColor;
+        this.complimentaryColor1 = this.palette.artistColor;
+        this.complimentaryColor2 = this.palette.borderColor;
+        this.colorChoices = [
+            this.baseColor,
+            this.complimentaryColor1,
+            this.complimentaryColor2
+        ];
+    }
+
     randomColor() {
         // pick a random color
         return this.colorChoices[~~random(0, this.colorChoices.length)].replace(
@@ -273,6 +284,7 @@ export const updateColors = (palette) => {
     console.log("updateColors");
     if (palette) {
         colorPalette.setPalette(palette);
+        colorPalette.updateColorChoices();
     }
     orbs.forEach((orb) => {
         orb.fill = colorPalette.randomColor();
