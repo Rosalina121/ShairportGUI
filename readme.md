@@ -5,22 +5,33 @@ A nice web interface for showing the shairport-sync metadata.
 <table>
   <thead>
     <tr>
-      <th>Horizontal (Static Gradient and Blurred Image)</th>
-      <th>Vertical (BlurHash, believe me, it moves)</th>
+      <th colspan=2>Horizontal (Static Gradient)</th>
+      <!-- <th>Vertical (BlurHash)</th> -->
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>
+      <td colspan="2">
         <image alt="Your Love is a Drug by Garoad" src="img/Screen1.png">
-      </td>
-      <td rowspan="2">
-        <image alt="Addict by Silva Hound" src="img/Screen3.png" height="100%">
       </td>
     </tr>
     <tr>
-      <td>
+    </tr>
+    <tr>
+      <td colspan="2">
         <image alt="Myths You Forgot by Camellia and Toby Fox" src="img/Screen2.png">
+      </td>
+    </tr>
+    <tr>
+      <th>Vertical (BlurHash)</th>
+      <th>Changing background types</th>
+    </tr>
+    <tr>
+      <td>
+        <image alt="Addict by Silva Hound" src="img/Screen3.png" height="100%">
+      </td>
+      <td>
+        <image alt="Addict by Silva Hound" src="img/Screen3.png" height="100%">
       </td>
     </tr>
   </tbody>
