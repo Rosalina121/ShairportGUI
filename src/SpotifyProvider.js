@@ -2,7 +2,7 @@ const SpotifyWebApi = require("spotify-web-api-node");
 const util = require("util");
 const SongProvider = require("./SongProvider");
 const { emitSongCover, emitSongMeta } = require("./utils");
-var request = require("request").defaults({ encoding: null });
+const axios = require("axios");
 
 class SpotifyProvider extends SongProvider {
     scopes = ["user-read-currently-playing"];
@@ -53,8 +53,10 @@ class SpotifyProvider extends SongProvider {
 
                     // picture
                     const url = track.body.item?.album.images[0].url;
-                    const imageRes = await util.promisify(request.get)(url);
-                    emitSongCover(imageRes.body);
+                    const imageRes = await axios.get(url, {
+                        responseType: "arraybuffer"
+                    });
+                    emitSongCover(imageRes.data);
                 }
             } catch (err) {
                 console.log(err);
