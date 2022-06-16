@@ -259,8 +259,8 @@ export const startFancyBlur = (palette) => {
     // Create orbs
     const orbs = [];
     console.log("Children count: " + app.stage.children.length);
-    while (app.stage.children[0]) {
-        app.stage.children[0].destroy();
+    for (let i = 0; i < 10; i++) {
+        app.stage.children[i].destroy();
     }
     console.log("Children count after removal: " + app.stage.children.length);
 
@@ -279,7 +279,7 @@ export const startFancyBlur = (palette) => {
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         app.ticker.add(() => {
             // update and render each orb, each frame. app.ticker attempts to run at 60fps
-            orbs.forEach((orb) => {
+            orbs?.forEach((orb) => {
                 orb.update();
                 orb.render();
             });
