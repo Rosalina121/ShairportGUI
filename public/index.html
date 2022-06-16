@@ -13,6 +13,7 @@
     </head>
     <body>
         <div class="background-img"></div>
+        <canvas class="orb-canvas"></canvas>
         <div class="container">
             <div class="thumbnail-border" onclick="toggleBackgroundType()">
                 <img
@@ -31,7 +32,7 @@
         </div>
         <!-- /container -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-        <!-- Uncomment for BlurHash -->
+        <script type="module" src="fancyBlur.js"></script>
         <script src="blurhash_pure_js_port.min.js"></script>
         <script src="scripts.js"></script>
     </body>

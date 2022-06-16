@@ -23,15 +23,15 @@ A nice web interface for showing the shairport-sync metadata.
       </td>
     </tr>
     <tr>
-      <th>Vertical (BlurHash, with background animation)</th>
+      <th>Vertical (Fancy - WebGL)</th>
       <th>Changing background types</th>
     </tr>
     <tr>
       <td>
-        <image alt="Heaven's door by AJ Dispirito" src="https://user-images.githubusercontent.com/15912902/174042168-1ead1263-ad52-4bd3-80e1-e6fe0b09d2e6.gif" width="100%">
+        This is a placeholder. I have to record a GIF
       </td>
       <td>
-        <image alt="Addict by Silva Hound" src="https://user-images.githubusercontent.com/15912902/174038813-84c5aa6f-afd4-4e30-a4e8-75cd73053bd3.gif" width="100%">
+        This is a placeholder. I have to record a GIF
       </td>
     </tr>
   </tbody>
@@ -49,7 +49,7 @@ Built using:
 -   [node-vibrant](https://www.npmjs.com/package/node-vibrant)
 -   GitHub Copilot (because I'm learning Node)
 -   parts of CSS from [neumorphism, pure css](https://codepen.io/b-r-y/pen/wvrXdEd) by Bryanna Lucyk (though after some refactorings I mainly use the neumorphic drop-shadows)
--   [Dens49's port](https://github.com/Dens49/blurhash-js) of [blurhash](https://blurha.sh/) to ES6
+-   [George Francis' Generative Landing Page & WebGL Powered Background](https://georgefrancis.dev/writing/create-a-generative-landing-page-and-webgl-powered-background/)
 -   the mighty power of `F L E X B O X`
 
 This project is inspired by [Shairport Sync Metadata Display](https://github.com/AlainGourves/shairport-metadata-display) and works similarly, but without any fancy transitions. And has less features ofc (though one might argue if fancy looks are better than music controls).
@@ -75,12 +75,12 @@ The current `@media` query might not fit your needs though, but you can easily c
 ### Backgrounds
 Currently 3 types of backgrounds are supported:
 * Blurred Image - the same image as on the cover, but blurred
-* Static Gradient - gradients generated from the color palette
-* BlurHash - animated gradient-like image using BlurHash
+* Gradient - gradients generated from the color palette
+* Fancy - WebGL based background mimicking Apple Music blur and others
 
 They all have their pros and cons, but you can decide which you like the most by clicking on the image to toggle between them (current selection is saved to local storage so you don't have to redo this every time).  
-Imo the text is most readable on the Static Gradient, but BlurHash almost mimics Apple Music's fancy moving blur.  
-Also both Static Gradient and BlurHash have some filters applied like `saturation(1.5)` and `brightness(0.8)`. You can ofc adjust them to your liking.
+Imo the text is most readable on the Gradient, but Fancy is, well, fancy. Looks super cool.
+Also Gradient havs some filters applied like `brightness(0.8)`. You can ofc adjust them to your liking.
 
 ## Known issues
 
@@ -99,7 +99,7 @@ Also both Static Gradient and BlurHash have some filters applied like `saturatio
 
 ## Notes
 
-This project was build with Raspberry Pi Zero W in mind. But is no longer. I decided that it's too much for a little poor Pi Zero to handle both a server and Chromium so if you want to run it on Pi just disable animations and blurHash.
+This project was build with Raspberry Pi Zero W in mind. But is no longer. I decided that it's too much for a little poor Pi Zero to handle both a server and Chromium so if you want to run it on Pi just disable animations and Fancy background.
 
 Also, the code probably could've been written more cleanly and overall better. Considering this project is still in progress some things may change for the better. Or worse if I become a feature creep (looking at the roadmap, yeah).
 

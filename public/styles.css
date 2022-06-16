@@ -49,11 +49,22 @@
   }
 }
 
+
 body {
   background-color: var(--brShadowColor);
   font-family: 'Public Sans', sans-serif;
   color: var(--songColor);
   overflow: hidden;
+}
+
+.orb-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .container {
@@ -104,6 +115,7 @@ body {
     0px 4px 20px rgba(var(--brShadowColorRaw), 0.1),
     0px 8px 24px rgba(var(--brShadowColorRaw), 0.1),
     0px 16px 45px rgba(var(--tlShadowColorRaw), 0.4);
+    cursor: pointer;
 }
 
 .song-details {

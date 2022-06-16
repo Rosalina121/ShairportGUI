@@ -20,8 +20,8 @@ const processTypes = (backgroundType) => {
         case "blur":
             setBackgroundBlur();
             break;
-        case "blurHash":
-            setBackgroundBlurHash();
+        case "fancy":
+            setBackgroundFancy();
             break;
         default:
             setBackgroundImage();
@@ -48,18 +48,19 @@ const toggleBackgroundType = () => {
         changeStyle("blur");
         console.log("background type set to blur");
     } else if (backgroundType === "blur") {
-        changeStyle("blurHash");
-        console.log("background type set to blurHash");
-    } else if (backgroundType === "blurHash") {
+        changeStyle("fancy");
+        console.log("background type set to fancy");
+    } else if (backgroundType === "fancy") {
         changeStyle("image");
         console.log("background type set to image");
     }
 };
 
 const resetStyle = () => {
-    imgContainer.style.backgroundImage = "";
-    imgContainer.style.filter = "";
-    imgContainer.style.animation = "";
+    document.querySelector(".background-img").style.removeProperty("display");
+    imgContainer.style.removeProperty("background-image");
+    imgContainer.style.removeProperty("filter");
+    imgContainer.style.removeProperty("animation");
 };
 
 const setBackgroundImage = () => {
@@ -67,6 +68,18 @@ const setBackgroundImage = () => {
         document.querySelector("#cover").src
     })`;
     imgContainer.style["filter"] = "blur(70px)";
+};
+
+const setBackgroundFancy = () => {
+    document.querySelector(".background-img").style.display = "none";
+    // I shouldn't have done that but it works
+    import("./fancyBlur.js")
+        .then(({ startFancyBlur }) => {
+            startFancyBlur();
+        })
+        .catch((error) => {
+            console.error(error);
+        });
 };
 
 const setBackgroundBlur = () => {
@@ -88,12 +101,6 @@ const setBackgroundBlur = () => {
     imgContainer.style.filter = "brightness(0.8)";
 };
 
-const setBackgroundBlurHash = () => {
-    imgContainer.style.animation = "positionChange 7s infinite alternate";
-    imgContainer.style.filter = "saturate(1.5)";
-    blurImage();
-};
-
 // get background type (either image, blur or blurHash) from browser local storage
 const getBackgroundType = () => {
     let backgroundType = localStorage.getItem("backgroundType");
@@ -108,42 +115,18 @@ const saveBackgroundType = (backgroundType) => {
     localStorage.setItem("backgroundType", backgroundType);
 };
 
-// blur image
-const blurImage = () => {
-    const img = new Image();
-    img.crossOrigin = "Anonymous";
-    img.onload = () => {
-        const imgData = blurhash.getImageData(img);
-        blurhash
-            .encodePromise(imgData, img.width, img.height, 4, 4)
-            .then((hash) => {
-                return blurhash.decodePromise(hash, img.width, img.height);
-            })
-            .then((blurhashImgData) => {
-                // as image object with promise
-                return blurhash.getImageDataAsImageWithOnloadPromise(
-                    blurhashImgData,
-                    img.width,
-                    img.height
-                );
-            })
-            .then((imgObject) => {
-                imgContainer.style.backgroundImage = `url(${imgObject.src})`;
-            });
-    };
-    img.src = document.querySelector("#cover").src;
-};
-
 const updateBackground = (backgroundType, pictureData) => {
     switch (backgroundType) {
         case "image":
             updateBackgroundImage(pictureData);
             break;
-        case "blurHash":
-            updateBackgroundBlurHash();
+        case "fancy":
+            setBackgroundFancy();
             break;
         default:
             // basically blur, do nothing as blur uses palette colors
+            // this can be an if statement,
+            // but I'm leaving this in case I want to add more background types
             break;
     }
 };
@@ -155,11 +138,6 @@ const updateBackgroundImage = (pictureData) => {
         imgContainer.style.filter = "blur(70px)";
     }
     console.log("background picture set!");
-};
-
-const updateBackgroundBlurHash = () => {
-    changeStyle("blurHash");
-    console.log("blur image set!");
 };
 
 let socket = io();
@@ -187,4 +165,5 @@ socket.on("palette", (palette) => {
     console.log("palette set!");
 });
 
-onInit();
+document.addEventListener("DOMContentLoaded", onInit, false);
+console.log("scripts loaded!");
