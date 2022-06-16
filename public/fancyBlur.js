@@ -154,10 +154,10 @@ class Orb {
 }
 
 const cssVarToHSL = (colorFromRoot) => {
-    const colorArray = colorFromRoot.split(",").map((item) => {
-        return parseInt(item, 10);
-    });
-    return RGBToHSL(colorArray[0], colorArray[1], colorArray[2]);
+    // const colorArray = colorFromRoot.split(",").map((item) => {
+    //     return parseInt(item, 10);
+    // });
+    return RGBToHSL(colorFromRoot[0], colorFromRoot[1], colorFromRoot[2]);
 };
 
 class ColorPalette {
