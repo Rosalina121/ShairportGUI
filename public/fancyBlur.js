@@ -241,8 +241,11 @@ class ColorPalette {
 export const startFancyBlur = (palette) => {
     console.log("startFancyBlur");
     document.querySelector(".background-img").style.display = "none";
+
     const colorPalette = new ColorPalette();
     colorPalette.setPalette(palette);
+
+
 
     // Create orbs
     const orbs = [];
@@ -262,6 +265,7 @@ export const startFancyBlur = (palette) => {
     }
     console.log('Children count after new added: ' + app.stage.children.length)
 
+    app.ticker.destroy();
 
     // Animate!
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
