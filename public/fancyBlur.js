@@ -162,6 +162,11 @@ const cssVarToHSL = (colorFromRoot) => {
 
 class ColorPalette {
     constructor() {
+        this.palette = {
+            songColor: [254, 1, 193],
+            artistColor: [249, 212, 2],
+            borderColor: [0, 194, 255]
+        };
         this.setColors();
         this.setCustomProperties();
     }
