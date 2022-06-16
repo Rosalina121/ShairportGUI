@@ -46,7 +46,6 @@ app.get("/callback", async (req, res) => {
     }
 });
 
-console.log("path", path.join(__dirname, "..", "public"));
 app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.use((err, req, res, next) => {
