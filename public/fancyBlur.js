@@ -248,8 +248,10 @@ export const startFancyBlur = (palette) => {
     const orbs = [];
     console.log('Children count: ' + app.stage.children.length)
     for (var i = app.stage.children.length - 1; i >= 0; i--) {
-        app.stage.removeChild(stage.children[i]);
+        app.stage.removeChild(app.stage.children[i]);
     }
+    console.log('Children count after removal: ' + app.stage.children.length)
+
 
     for (let i = 0; i < 10; i++) {
         const orb = new Orb(colorPalette.randomColor());
@@ -258,6 +260,8 @@ export const startFancyBlur = (palette) => {
 
         orbs.push(orb);
     }
+    console.log('Children count after new added: ' + app.stage.children.length)
+
 
     // Animate!
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
