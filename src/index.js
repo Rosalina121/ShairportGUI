@@ -1,32 +1,29 @@
-// import the module
-const express = require("express");
-const app = express();
-const http = require("http");
-const { Server } = require("socket.io");
-const path = require("path");
-require("dotenv").config();
+import SpotifyProvider from "./SpotifyProvider";
+import ShairportProvider from "./ShairportProvider";
+import express from "express";
+import http from "http";
+import { Server } from "socket.io";
+import path from "path";
 
-const SpotifyProvider = require("./SpotifyProvider");
-const ShairportProvider = require("./ShairportProvider");
+require("dotenv").config();
+const app = express();
 
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
         origin: "192.168.1.181:3000", // change this to your local ip
         methods: ["GET,POST"],
-        credentials: true,
-        transports: ["websocket", "polling"]
+        credentials: true
     },
     allowEIO3: true
 });
-global.io = io;
 
 function selectProvider(providerName) {
     switch (providerName) {
         case "spotify":
-            return new SpotifyProvider();
+            return new SpotifyProvider(io);
         default:
-            return new ShairportProvider("/tmp/shairport-sync-metadata"); // your metadata pipe path
+            return new ShairportProvider(io, "/tmp/shairport-sync-metadata"); // your metadata pipe path
     }
 }
 

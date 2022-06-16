@@ -1,5 +1,5 @@
-const fs = require("fs");
-const vibrant = require("node-vibrant");
+import fs from "fs";
+import vibrant from "node-vibrant";
 
 const removeBrackets = (str) => {
     str = str.replace(/\[[^]*\]/, "");
@@ -18,8 +18,8 @@ const saveBase64ImageToDisk = (data, fileName) => {
     });
 };
 
-const emitPalette = (image) => {
-    palette = vibrant.from(image).getPalette((err, palette) => {
+const emitPalette = (io, image) => {
+    vibrant.from(image).getPalette((err, palette) => {
         // TODO: Add actual error handling
         if (!err) {
             console.log("no error?");
@@ -40,29 +40,24 @@ const emitPalette = (image) => {
     });
 };
 
-function emitSongMeta(title, artist, album) {
+export function emitSongMeta(io, title, artist, album) {
     const newTitle = removeBrackets(title); // get rid of brackets coz text is too long
     const newAlbum = removeBrackets(album); // same
     console.log(newTitle + " - " + artist + " - " + newAlbum);
     io.emit("metadata", { title: newTitle, artist, album: newAlbum });
 }
 
-function emitSongCover(pictureData) {
+export function emitSongCover(io, pictureData) {
     let base64 = Buffer.from(pictureData).toString("base64");
     // save to disk and emit palette
     try {
         saveBase64ImageToDisk(base64, "./image.png").then((fileName) => {
             console.log(fileName);
             // get palette
-            emitPalette(fileName);
+            emitPalette(io, fileName);
         });
         io.emit("pictureData", base64);
     } catch (err) {
         console.log(err);
     }
 }
-
-module.exports = {
-    emitSongMeta,
-    emitSongCover
-};
