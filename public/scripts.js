@@ -3,7 +3,11 @@ let r = document.querySelector(":root");
 let backgroundType = "image";
 const imgContainer = document.querySelector(".background-img");
 
+let internalPalette = {};
+
 const applyPallette = (palette) => {
+    internalPalette = palette;
+    console.log(internalPalette);
     for (color in palette) {
         r.style.setProperty(`--${color}`, "rgb(" + palette[color] + ")");
         console.log(`${color}: rgb(${palette[color]})`);

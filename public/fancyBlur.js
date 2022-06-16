@@ -5,7 +5,7 @@ import hsl from "https://cdn.skypack.dev/hsl-to-hex";
 import debounce from "https://cdn.skypack.dev/debounce";
 
 const RGBToHSL = (r, g, b) => {
-    console.log(r +' ' + g + "" + b)
+    console.log(r + " " + g + "" + b);
     r /= 255;
     g /= 255;
     b /= 255;
@@ -18,7 +18,7 @@ const RGBToHSL = (r, g, b) => {
             ? 2 + (b - r) / s
             : 4 + (r - g) / s
         : 0;
-    console.log(h +' ' + s + "" + l)
+    console.log(h + " " + s + "" + l);
     return [
         60 * h < 0 ? 60 * h + 360 : 60 * h,
         100 * (s ? (l <= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0),
@@ -66,14 +66,15 @@ class Orb {
 
         // what color is the orb?
         this.fill = fill;
-        
+
         if (window.innerWidth >= window.innerHeight) {
             this.radius = random(window.innerWidth / 4, window.innerWidth / 2);
         } else {
-            this.radius = random(window.innerHeight / 4, window.innerHeight / 2);
+            this.radius = random(
+                window.innerHeight / 4,
+                window.innerHeight / 2
+            );
         }
-   
-        
 
         // starting points in "time" for the noise/self similar random values
         this.xOff = random(0, 1000);
@@ -154,15 +155,24 @@ class Orb {
 
 const cssVarToHSL = (colorFromRoot) => {
     const colorArray = colorFromRoot.split(", ").map((item) => {
-        return parseInt(item, 10)
-    })
-    return RGBToHSL(colorArray[0], colorArray[1], colorArray[2])
-}
+        return parseInt(item, 10);
+    });
+    return RGBToHSL(colorArray[0], colorArray[1], colorArray[2]);
+};
 
 class ColorPalette {
     constructor() {
         this.setColors();
         this.setCustomProperties();
+        this.palette = {
+            songColor: "254, 1, 193",
+            artistColor: "249, 212, 2",
+            borderColor: "0, 194, 255"
+        };
+    }
+
+    setPalette(palette) {
+        this.palette = palette;
     }
 
     setColors() {
@@ -174,31 +184,25 @@ class ColorPalette {
         this.saturation = 95;
         this.lightness = 50;
 
-        let r = document.querySelector(":root");
-        const songColor = getComputedStyle(r).getPropertyValue(
-            "--songColorRaw"
-        );
-        console.log(songColor)
-        const artistColor = getComputedStyle(r).getPropertyValue(
-            "--artistColorRaw"
-        );
-        console.log(artistColor)
-        const borderColor = getComputedStyle(r).getPropertyValue(
-            "--borderColorRaw"
-        );
-        console.log(borderColor)
-        const songColorHSL = cssVarToHSL(songColor)
-        const artistColorHSL = cssVarToHSL(artistColor)
-        const borderColorHSL = cssVarToHSL(borderColor)
-        console.log(songColorHSL)
-        console.log(artistColorHSL)
-        console.log(borderColorHSL)
-        
+        const songColor = this.palette.songColor;
+        console.log(songColor);
+        const artistColor = this.palette.artistColor;
+        console.log(artistColor);
+        const borderColor = this.palette.borderColor;
+        console.log(borderColor);
+
+        const songColorHSL = cssVarToHSL(songColor);
+        const artistColorHSL = cssVarToHSL(artistColor);
+        const borderColorHSL = cssVarToHSL(borderColor);
+
+        console.log(songColorHSL);
+        console.log(artistColorHSL);
+        console.log(borderColorHSL);
 
         // define a base color
         this.baseColor = hsl(
-            borderColorHSL[0], 
-            borderColorHSL[1], 
+            borderColorHSL[0],
+            borderColorHSL[1],
             borderColorHSL[2]
         );
         this.complimentaryColor1 = hsl(
@@ -242,10 +246,11 @@ class ColorPalette {
     }
 }
 
-export const startFancyBlur = () => {
-    console.log("startFancyBlur")
-    document.querySelector('.background-img').style.display = 'none'
+export const startFancyBlur = (palette) => {
+    console.log("startFancyBlur");
+    document.querySelector(".background-img").style.display = "none";
     const colorPalette = new ColorPalette();
+    colorPalette.setPalette(palette);
 
     // Create orbs
     const orbs = [];
@@ -276,5 +281,4 @@ export const startFancyBlur = () => {
             orb.render();
         });
     }
-}
-
+};
