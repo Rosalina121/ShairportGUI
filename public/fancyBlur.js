@@ -26,18 +26,6 @@ const RGBToHSL = (r, g, b) => {
     ];
 };
 
-// Create PixiJS app
-const app = new PIXI.Application({
-    // render to <canvas class="orb-canvas"></canvas>
-    view: document.querySelector(".orb-canvas"),
-    // auto adjust size to fit the current window
-    resizeTo: window,
-    // transparent background, we will be creating a gradient background later using CSS
-    transparent: true
-});
-
-app.stage.filters = [new KawaseBlurFilter(70, 10, true)];
-
 // Create a new simplex noise instance
 const simplex = new SimplexNoise();
 
@@ -176,6 +164,7 @@ class ColorPalette {
     }
 
     setColors() {
+        // initial colors
         const songColor = this.palette.songColor;
         console.log(songColor);
         const artistColor = this.palette.artistColor;
@@ -191,7 +180,6 @@ class ColorPalette {
         console.log(artistColorHSL);
         console.log(borderColorHSL);
 
-        // define a base color
         this.baseColor = hsl(
             borderColorHSL[0],
             borderColorHSL[1],
@@ -239,6 +227,18 @@ class ColorPalette {
 }
 
 export const startFancyBlur = (palette) => {
+    // Create PixiJS app
+    const app = new PIXI.Application({
+        // render to <canvas class="orb-canvas"></canvas>
+        view: document.querySelector(".orb-canvas"),
+        // auto adjust size to fit the current window
+        resizeTo: window,
+        // transparent background, we will be creating a gradient background later using CSS
+        transparent: true
+    });
+
+    app.stage.filters = [new KawaseBlurFilter(70, 10, true)];
+    
     console.log("startFancyBlur");
     document.querySelector(".background-img").style.display = "none";
     const colorPalette = new ColorPalette();

@@ -124,11 +124,9 @@ const updateBackground = (backgroundType, pictureData) => {
         case "image":
             updateBackgroundImage(pictureData);
             break;
-        case "fancy":
-            setBackgroundFancy();
-            break;
         default:
             // basically blur, do nothing as blur uses palette colors
+            // fancy too
             // this can be an if statement,
             // but I'm leaving this in case I want to add more background types
             break;
@@ -166,6 +164,9 @@ socket.on("pictureData", (pictureData) => {
 socket.on("palette", (palette) => {
     console.log("palette get!");
     applyPallette(palette);
+    if (backgroundType === "fancy") {
+        setBackgroundFancy();
+    }
     console.log("palette set!");
 });
 
