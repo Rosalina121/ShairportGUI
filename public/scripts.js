@@ -62,6 +62,7 @@ const toggleBackgroundType = () => {
 
 const resetStyle = () => {
     document.querySelector(".background-img").style.removeProperty("display");
+    document.querySelector(".orb-canvas").style.display = "none";
     imgContainer.style.removeProperty("background-image");
     imgContainer.style.removeProperty("filter");
     imgContainer.style.removeProperty("animation");
@@ -75,6 +76,7 @@ const setBackgroundImage = () => {
 };
 
 const setBackgroundFancy = () => {
+    document.querySelector(".orb-canvas").style.removeProperty("display");
     document.querySelector(".background-img").style.display = "none";
     // I shouldn't have done that but it works
     // also, should add handling if fancy has been already set
