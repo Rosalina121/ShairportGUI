@@ -246,9 +246,9 @@ export const startFancyBlur = (palette) => {
 
     // Create orbs
     const orbs = [];
-    console.log('Children count: ' + stage.children.length)
-    for (var i = stage.children.length - 1; i >= 0; i--) {
-        stage.removeChild(stage.children[i]);
+    console.log('Children count: ' + app.stage.children.length)
+    for (var i = app.stage.children.length - 1; i >= 0; i--) {
+        app.stage.removeChild(stage.children[i]);
     }
 
     for (let i = 0; i < 10; i++) {
