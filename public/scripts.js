@@ -10,15 +10,6 @@ const applyPallette = (palette) => {
         r.style.setProperty(`--${color}Raw`, palette[color]);
         console.log(`${color}Raw: ${palette[color]}`);
     }
-
-    r.style.setProperty(
-        `--brShadowColorForBoxShadow`,
-        `${palette.brShadowColor}`
-    );
-    r.style.setProperty(
-        `--tlShadowColorForBoxShadow`,
-        `${palette.tlShadowColor}`
-    );
 };
 
 const processTypes = (backgroundType) => {

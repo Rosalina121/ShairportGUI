@@ -32,5 +32,6 @@ npm-debug.log
 # OSX hidden files
 .DS_Store
 
-#lol
+# ShairportGUI specific files
 replace.sh
+image.png
