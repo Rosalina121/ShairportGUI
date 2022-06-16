@@ -4,8 +4,6 @@ const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 
-// const ws281x = require("rpi-ws281x-native");
-
 const SpotifyProvider = require("./SpotifyProvider");
 const path = require("path");
 const ShairportProvider = require("./ShairportProvider");
@@ -21,23 +19,6 @@ const io = new Server(server, {
     allowEIO3: true
 });
 global.io = io;
-
-// ws281x stuff
-// const NUM_LEDS = 30;    // change to your LED amount
-// const pixelData = new Uint32Array(NUM_LEDS);
-// ws281x.init(NUM_LEDS);  // comment to disable LEDs
-
-// const changeStripColor = (color) => {
-//     // set LED brightness to max
-//     ws281x.setBrightness(255);
-//     console.log("brightness set");
-//     // set all LEDs to the color
-//     for (let i = 0; i < NUM_LEDS; i++) {
-//         pixelData[i] = color;
-//     }
-//     console.log("color set");
-//     ws281x.render(pixelData);
-// }
 
 function selectProvider(providerName) {
     switch (providerName) {

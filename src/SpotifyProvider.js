@@ -6,7 +6,7 @@ var request = require("request").defaults({ encoding: null });
 
 class SpotifyProvider extends SongProvider {
     scopes = ["user-read-currently-playing"];
-    redirectUri = "http://localhost:3000/callback";
+    redirectUri = process.env.REDIRECT_URI ?? "http://localhost:3000/callback";
     clientId = process.env.SPOTIFY_ID;
     state = "some-state-of-my-choice";
 

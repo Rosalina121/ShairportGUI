@@ -34,7 +34,6 @@ const emitPalette = (image) => {
             };
             console.log(paletteObj);
             io.emit("palette", paletteObj);
-            // changeStripColor(0xe11bf7);   // Comment to disable LEDs
         } else {
             console.error(err);
         }
