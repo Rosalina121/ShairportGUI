@@ -245,7 +245,7 @@ export const startFancyBlur = (palette) => {
     const colorPalette = new ColorPalette();
     colorPalette.setPalette(palette);
 
-
+    app.ticker = new PIXI.Ticker();
 
     // Create orbs
     const orbs = [];
@@ -266,7 +266,6 @@ export const startFancyBlur = (palette) => {
     console.log('Children count after new added: ' + app.stage.children.length)
 
     // create app.ticker again
-    app.ticker = new PIXI.Ticker();
 
     // Animate!
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
