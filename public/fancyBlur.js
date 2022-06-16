@@ -268,6 +268,7 @@ export const startFancyBlur = (palette) => {
     } else {
         for (let i = 0; i < 10; i++) {
             const orb = new Orb(colorPalette.randomColor());
+            app.stage.children[i].clear();
             app.stage.children[i] = orb.graphics;
             orbs.push(orb);
         }
@@ -279,8 +280,8 @@ export const startFancyBlur = (palette) => {
         app.ticker.add(() => {
             // update and render each orb, each frame. app.ticker attempts to run at 60fps
             orbs.forEach((orb) => {
-                orb?.update();
-                orb?.render();
+                orb.update();
+                orb.render();
             });
         });
     } else {
