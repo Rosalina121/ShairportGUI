@@ -162,11 +162,6 @@ const cssVarToHSL = (colorFromRoot) => {
 
 class ColorPalette {
     constructor() {
-        this.palette = {
-            songColor: [254, 1, 193],
-            artistColor: [249, 212, 2],
-            borderColor: [0, 194, 255]
-        };
         this.setColors();
         this.setCustomProperties();
     }
@@ -243,7 +238,16 @@ export const startFancyBlur = (palette) => {
     document.querySelector(".background-img").style.display = "none";
 
     const colorPalette = new ColorPalette();
-    colorPalette.setPalette(palette);
+    if (palette) {
+        colorPalette.setPalette(palette);
+    } else {
+        const backupPalette = {
+            songColor: [254, 1, 193],
+            artistColor: [249, 212, 2],
+            borderColor: [0, 194, 255]
+        };
+        colorPalette.setPalette(backupPalette);
+    }
 
     // app.ticker = new PIXI.Ticker();
 
