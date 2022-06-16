@@ -156,7 +156,7 @@ class ColorPalette {
             borderColor: [0, 194, 255]
         };
         this.setColors();
-        this.setCustomProperties();
+        // this.setCustomProperties();  // not needed coz already using global vars
     }
 
     setPalette(palette) {
@@ -170,7 +170,7 @@ class ColorPalette {
         // initial colors
         const songColor = this.palette.songColor;
         console.log(songColor);
-        const artistColor = this.palette.artistColor;
+        const artistColor = this.palette.brShadowColor;
         console.log(artistColor);
         const borderColor = this.palette.borderColor;
         console.log(borderColor);
@@ -224,18 +224,19 @@ class ColorPalette {
         );
     }
 
-    setCustomProperties() {
-        // set CSS custom properties so that the colors defined here can be used throughout the UI
-        document.documentElement.style.setProperty("--hue", this.hue);
-        document.documentElement.style.setProperty(
-            "--hue-complimentary1",
-            this.complimentaryHue1
-        );
-        document.documentElement.style.setProperty(
-            "--hue-complimentary2",
-            this.complimentaryHue2
-        );
-    }
+    // may be useful in the future
+    // setCustomProperties() {
+    //     // set CSS custom properties so that the colors defined here can be used throughout the UI
+    //     document.documentElement.style.setProperty("--hue", this.hue);
+    //     document.documentElement.style.setProperty(
+    //         "--hue-complimentary1",
+    //         this.complimentaryHue1
+    //     );
+    //     document.documentElement.style.setProperty(
+    //         "--hue-complimentary2",
+    //         this.complimentaryHue2
+    //     );
+    // }
 }
 
 // Create PixiJS app
@@ -244,7 +245,7 @@ const app = new PIXI.Application({
     view: document.querySelector(".orb-canvas"),
     // auto adjust size to fit the current window
     resizeTo: window,
-    // transparent background, we will be creating a gradient background later using CSS
+    // transparent background since we already have a background color
     transparent: true
 });
 
