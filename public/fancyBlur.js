@@ -161,6 +161,9 @@ class ColorPalette {
 
     setPalette(palette) {
         this.palette = palette;
+        this.baseColor = this.palette.songColor;
+        this.complimentaryColor1 = this.palette.artistColor;
+        this.complimentaryColor2 = this.palette.borderColor;
     }
 
     setColors() {
@@ -172,6 +175,7 @@ class ColorPalette {
         const borderColor = this.palette.borderColor;
         console.log(borderColor);
 
+        // TODO: rename cssVarToHSL to something true lol
         const songColorHSL = cssVarToHSL(songColor);
         const artistColorHSL = cssVarToHSL(artistColor);
         const borderColorHSL = cssVarToHSL(borderColor);
@@ -205,9 +209,6 @@ class ColorPalette {
     }
 
     updateColorChoices() {
-        this.baseColor = this.palette.songColor;
-        this.complimentaryColor1 = this.palette.artistColor;
-        this.complimentaryColor2 = this.palette.borderColor;
         this.colorChoices = [
             this.baseColor,
             this.complimentaryColor1,
@@ -284,7 +285,7 @@ export const updateColors = (palette) => {
     console.log("updateColors");
     if (palette) {
         colorPalette.setPalette(palette);
-        colorPalette.updateColorChoices();
+        colorPalette.setColors();
     }
     orbs.forEach((orb) => {
         orb.fill = colorPalette.randomColor();
