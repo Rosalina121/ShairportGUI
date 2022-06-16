@@ -3,9 +3,10 @@ const express = require("express");
 const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
+const path = require("path");
+require("dotenv").config();
 
 const SpotifyProvider = require("./SpotifyProvider");
-const path = require("path");
 const ShairportProvider = require("./ShairportProvider");
 
 const server = http.createServer(app);
@@ -29,7 +30,7 @@ function selectProvider(providerName) {
     }
 }
 
-const songProvider = selectProvider(process.argv[2]);
+const songProvider = selectProvider(process.env.SONG_PROVIDER);
 
 app.get("/", (req, res) => {
     if (!songProvider.isLoggedIn) {
