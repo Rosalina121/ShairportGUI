@@ -1,10 +1,13 @@
-const SpotifyWebApi = require("spotify-web-api-node");
-const util = require("util");
-const SongProvider = require("./SongProvider");
-const { emitSongCover, emitSongMeta } = require("./utils");
-const axios = require("axios");
+import axios from "axios";
+import SpotifyWebApi from "spotify-web-api-node";
+import SongProvider from "./SongProvider";
+import { emitSongCover, emitSongMeta } from "./utils";
 
-class SpotifyProvider extends SongProvider {
+export default class SpotifyProvider extends SongProvider {
+    constructor(io) {
+        super();
+        this.io = io;
+    }
     scopes = ["user-read-currently-playing"];
     redirectUri = process.env.REDIRECT_URI ?? "http://localhost:3000/callback";
     clientId = process.env.SPOTIFY_ID;
@@ -16,7 +19,9 @@ class SpotifyProvider extends SongProvider {
         redirectUri: this.redirectUri
     });
 
-    authorizeURL = this.spotifyApi.createAuthorizeURL(this.scopes, this.state);
+    get authorizeURL() {
+        return this.spotifyApi.createAuthorizeURL(this.scopes, this.state);
+    }
 
     get isUsingOauth() {
         return true;
@@ -42,10 +47,13 @@ class SpotifyProvider extends SongProvider {
                 if (
                     track.body &&
                     track.body.item &&
-                    track.body.item.id !== currentSong
+                    track.body.item.id !== currentSong &&
+                    track.body.item.type === "track"
                 ) {
                     currentSong = track.body.item.id;
+
                     emitSongMeta(
+                        this.io,
                         track.body.item.name,
                         track.body.item.artists[0]?.name ?? "",
                         track.body.item?.album?.name ?? ""
@@ -56,7 +64,7 @@ class SpotifyProvider extends SongProvider {
                     const imageRes = await axios.get(url, {
                         responseType: "arraybuffer"
                     });
-                    emitSongCover(imageRes.data);
+                    emitSongCover(this.io, imageRes.data);
                 }
             } catch (err) {
                 console.log(err);
@@ -64,5 +72,3 @@ class SpotifyProvider extends SongProvider {
         }, 1000);
     }
 }
-
-module.exports = SpotifyProvider;

@@ -4,8 +4,8 @@
     "description": "Web-based GUI server (lol) for shairport-sync",
     "main": "src/index.js",
     "scripts": {
-        "startPi": "./replace.sh && node src/index.js",
-        "start": "node src/index.js",
+        "startPi": "./replace.sh && ts-node src/index.js",
+        "start": "ts-node src/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -28,6 +28,9 @@
         "spotify-web-api-node": "^5.0.2"
     },
     "devDependencies": {
-        "prettier": "2.6.2"
+        "@types/spotify-web-api-node": "^5.0.7",
+        "prettier": "2.6.2",
+        "ts-node": "^10.8.1",
+        "typescript": "^4.7.3"
     }
 }

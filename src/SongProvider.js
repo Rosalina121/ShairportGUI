@@ -1,15 +1,17 @@
-class SongProvider {
+export default class SongProvider {
     get isUsingOauth() {
         return false;
+    }
+
+    get authorizeURL() {
+        return null;
     }
 
     get isLoggedIn() {
         return true;
     }
 
-    async onOauthCallback(req, res) {
+    async onOauthCallback(_req, _res) {
         return;
     }
 }
-
-module.exports = SongProvider;

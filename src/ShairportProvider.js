@@ -1,9 +1,9 @@
-const SongProvider = require("./SongProvider");
-const ShairportReader = require("shairport-sync-reader");
-const { emitSongMeta, emitSongCover } = require("./utils");
+import SongProvider from "./SongProvider";
+import ShairportReader from "shairport-sync-reader";
+import { emitSongCover, emitSongMeta } from "./utils";
 
-class ShairportProvider extends SongProvider {
-    constructor(path) {
+export default class ShairportProvider extends SongProvider {
+    constructor(io, path) {
         super();
         // read from pipe
         this.pipeReader = new ShairportReader({
@@ -14,15 +14,13 @@ class ShairportProvider extends SongProvider {
         this.pipeReader.on("meta", function (metadata) {
             console.log("got meta: ");
             // parse metadata
-            emitSongMeta(metadata.minm, metadata.asar, metadata.asal);
+            emitSongMeta(io, metadata.minm, metadata.asar, metadata.asal);
         });
 
         this.pipeReader.on("PICT", function (pictureData) {
             console.log(pictureData);
             // pirctureData to base64
-            emitSongCover(pictureData);
+            emitSongCover(io, pictureData);
         });
     }
 }
-
-module.exports = ShairportProvider;
