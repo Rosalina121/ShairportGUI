@@ -264,7 +264,7 @@ export const startFancyBlur = (palette) => {
             app.stage.addChild(orb.graphics);
             orbs.push(orb);
         }
-        
+        console.log(orbs);
     } else {
         for (let i = 0; i < 10; i++) {
             const orb = new Orb(colorPalette.randomColor());
@@ -273,7 +273,7 @@ export const startFancyBlur = (palette) => {
         }
     }
     console.log(app.stage.children);
-
+    console.log(orbs);
     // Animate!
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         app.ticker.add(() => {
