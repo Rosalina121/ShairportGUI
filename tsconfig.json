@@ -9,5 +9,9 @@
     "forceConsistentCasingInFileNames": true,
     "strict": false,
     "skipLibCheck": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "public"
+  ],
 }

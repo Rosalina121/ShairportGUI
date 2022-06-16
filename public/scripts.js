@@ -8,7 +8,7 @@ let internalPalette = {};
 const applyPallette = (palette) => {
     internalPalette = palette;
     console.log(internalPalette);
-    for (color in palette) {
+    for (const color in palette) {
         r.style.setProperty(`--${color}`, "rgb(" + palette[color] + ")");
         console.log(`${color}: rgb(${palette[color]})`);
         r.style.setProperty(`--${color}Raw`, palette[color]);
