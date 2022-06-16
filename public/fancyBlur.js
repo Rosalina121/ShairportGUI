@@ -136,20 +136,20 @@ class Orb {
         this.yOff += this.inc;
     }
     render() {
-            // update the PIXI.Graphics position and scale values
-            this.graphics?.x = this.x;
-            this.graphics?.y = this.y;
-            this.graphics?.scale.set(this.scale);
+        // update the PIXI.Graphics position and scale values
+        this.graphics.x = this.x;
+        this.graphics.y = this.y;
+        this.graphics.scale.set(this.scale);
 
-            // clear anything currently drawn to graphics
-            this.graphics?.clear();
+        // clear anything currently drawn to graphics
+        this.graphics.clear();
 
-            // tell graphics to fill any shapes drawn after this with the orb's fill color
-            this.graphics?.beginFill(this.fill);
-            // draw a circle at { 0, 0 } with it's size set by this.radius
-            this.graphics?.drawCircle(0, 0, this.radius);
-            // let graphics know we won't be filling in any more shapes
-            this.graphics?.endFill();
+        // tell graphics to fill any shapes drawn after this with the orb's fill color
+        this.graphics.beginFill(this.fill);
+        // draw a circle at { 0, 0 } with it's size set by this.radius
+        this.graphics.drawCircle(0, 0, this.radius);
+        // let graphics know we won't be filling in any more shapes
+        this.graphics.endFill();
     }
 }
 
@@ -254,24 +254,25 @@ export const startFancyBlur = (palette) => {
         colorPalette.setPalette(backupPalette);
     }
 
-    // app.ticker = new PIXI.Ticker();
-
     // Create orbs
     const orbs = [];
-    console.log("Children count: " + app.stage.children.length);
-    while (app.stage.children[0]) {
-        app.stage.children[0].destroy();
+    console.log(app.stage.children);
+    if (app.stage.children.length === 0) {
+        // first run
+        for (let i = 0; i < 10; i++) {
+            const orb = new Orb(colorPalette.randomColor());
+            app.stage.addChild(orb.graphics);
+            orbs.push(orb);
+        }
+        
+    } else {
+        for (let i = 0; i < 10; i++) {
+            const orb = new Orb(colorPalette.randomColor());
+            app.stage.children[i] = orb.graphics;
+            orbs.push(orb);
+        }
     }
-    console.log("Children count after removal: " + app.stage.children.length);
-
-    for (let i = 0; i < 10; i++) {
-        const orb = new Orb(colorPalette.randomColor());
-
-        app.stage.addChild(orb.graphics);
-
-        orbs.push(orb);
-    }
-    console.log("Children count after new added: " + app.stage.children.length);
+    console.log(app.stage.children);
 
     // Animate!
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
