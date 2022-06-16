@@ -26,18 +26,6 @@ const RGBToHSL = (r, g, b) => {
     ];
 };
 
-// Create PixiJS app
-const app = new PIXI.Application({
-    // render to <canvas class="orb-canvas"></canvas>
-    view: document.querySelector(".orb-canvas"),
-    // auto adjust size to fit the current window
-    resizeTo: window,
-    // transparent background, we will be creating a gradient background later using CSS
-    transparent: true
-});
-
-app.stage.filters = [new KawaseBlurFilter(70, 10, true)];
-
 // Create a new simplex noise instance
 const simplex = new SimplexNoise();
 
@@ -238,43 +226,32 @@ class ColorPalette {
     }
 }
 
-export const startFancyBlur = (palette) => {
+// Create PixiJS app
+const app = new PIXI.Application({
+    // render to <canvas class="orb-canvas"></canvas>
+    view: document.querySelector(".orb-canvas"),
+    // auto adjust size to fit the current window
+    resizeTo: window,
+    // transparent background, we will be creating a gradient background later using CSS
+    transparent: true
+});
+
+app.stage.filters = [new KawaseBlurFilter(70, 10, true)];
+
+const colorPalette = new ColorPalette();
+
+const orbs = [];
+
+export const startFancyBlur = () => {
     console.log("startFancyBlur");
     document.querySelector(".background-img").style.display = "none";
 
-    const colorPalette = new ColorPalette();
-    if (palette) {
-        colorPalette.setPalette(palette);
-    } else {
-        const backupPalette = {
-            songColor: [254, 1, 193],
-            artistColor: [249, 212, 2],
-            borderColor: [0, 194, 255]
-        };
-        colorPalette.setPalette(backupPalette);
+    for (let i = 0; i < 10; i++) {
+        const orb = new Orb(colorPalette.randomColor());
+        app.stage.addChild(orb.graphics);
+        orbs.push(orb);
     }
 
-    // Create orbs
-    const orbs = [];
-    console.log(app.stage.children);
-    if (app.stage.children.length === 0) {
-        // first run
-        for (let i = 0; i < 10; i++) {
-            const orb = new Orb(colorPalette.randomColor());
-            app.stage.addChild(orb.graphics);
-            orbs.push(orb);
-        }
-        console.log(orbs);
-    } else {
-        for (let i = 0; i < 10; i++) {
-            const orb = new Orb(colorPalette.randomColor());
-            app.stage.children[i].clear();
-            app.stage.children[i] = orb.graphics;
-            orbs.push(orb);
-        }
-    }
-    console.log(app.stage.children);
-    console.log(orbs);
     // Animate!
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         app.ticker.add(() => {
@@ -291,4 +268,13 @@ export const startFancyBlur = (palette) => {
             orb.render();
         });
     }
+};
+export const updateColors = (palette) => {
+    console.log("updateColors");
+    if (palette) {
+        colorPalette.setPalette(palette);
+    }
+    orbs.forEach((orb) => {
+        orb.fill = colorPalette.randomColor();
+    });
 };

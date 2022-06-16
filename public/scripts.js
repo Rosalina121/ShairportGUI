@@ -77,6 +77,7 @@ const setBackgroundImage = () => {
 const setBackgroundFancy = () => {
     document.querySelector(".background-img").style.display = "none";
     // I shouldn't have done that but it works
+    // also, should add handling if fancy has been already set
     import("./fancyBlur.js")
         .then(({ startFancyBlur }) => {
             startFancyBlur();
@@ -142,6 +143,17 @@ const updateBackgroundImage = (pictureData) => {
     console.log("background picture set!");
 };
 
+const updateBackgroundFancy = () => {
+    // I shouldn't have done that but it works
+    import("./fancyBlur.js")
+        .then(({ updateColors }) => {
+            updateColors(internalPalette);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+};
+
 let socket = io();
 socket.on("metadata", (metadata) => {
     let title = document.querySelector("#title");
@@ -165,7 +177,7 @@ socket.on("palette", (palette) => {
     console.log("palette get!");
     applyPallette(palette);
     if (backgroundType === "fancy") {
-        setBackgroundFancy();
+        updateBackgroundFancy();
     }
     console.log("palette set!");
 });
