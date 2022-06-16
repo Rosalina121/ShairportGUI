@@ -31,17 +31,21 @@
     width:  70vw !important;
     height: 70vw !important;
   }
+  .song-thumbnail {
+    height: 70vw !important;
+    width:  70vw !important;
+  }
 
   .song-title {
-    font-size: 12vw !important;
+    font-size: 8vw !important;
   }
 
   .album-title {
-    font-size: 6vw !important;
+    font-size: 4vw !important;
   }
 
   .artist {
-    font-size: 7vw !important;
+    font-size: 5vw !important;
   }
 }
 
