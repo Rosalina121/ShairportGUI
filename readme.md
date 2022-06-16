@@ -5,39 +5,33 @@ A nice web interface for showing the shairport-sync metadata.
 <table>
   <thead>
     <tr>
-      <th colspan=2>Horizontal (Static Gradient)</th>
+      <th>Horizontal (Static Gradient)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td colspan="2">
+      <td>
         <image alt="Your Love is a Drug by Garoad" src="img/Screen1.png">
       </td>
     </tr>
     <tr>
-      <th colspan=2>Horizontal (Blurred Image)</th>  
+      <th>Horizontal (Blurred Image)</th>  
     </tr>
     <tr>
-      <td colspan="2">
+      <td>
         <image alt="Myths You Forgot by Camellia and Toby Fox" src="img/Screen2.png">
-      </td>
-    </tr>
-    <tr>
-      <th>Vertical (Fancy - WebGL)</th>
-      <th>Changing background types</th>
-    </tr>
-    <tr>
-      <td>
-        This is a placeholder. I have to record a GIF
-      </td>
-      <td>
-        This is a placeholder. I have to record a GIF
       </td>
     </tr>
   </tbody>
 </table>
 
-<sub><sup>Don't mind the gif compression</sup></sub>
+<sub><sup>I don't now how to neatly embed videos into markdown. Gifs work fine, but look deepfried</sup></sub>
+
+
+
+https://user-images.githubusercontent.com/15912902/174100762-d2bc8a1c-b0d7-4d5e-be15-620088be592d.mp4
+
+https://user-images.githubusercontent.com/15912902/174100872-cc56eed9-d6cd-4047-8728-b6900e52287b.mp4
 
 ## What did I use?
 
@@ -67,6 +61,7 @@ $ npm start
 ```
 
 ## Features
+### **⚠️ Spotify docs W.I.P. 🛠️**
 ### Playback
 Using the shairport-sync-reader you get track title, album, artist and an image. There's a whole lot more metadata available so you can easily add your own favorite info, but I didn't need that, so it's not used.
 ### Responsiveness
