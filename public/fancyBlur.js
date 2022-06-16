@@ -136,22 +136,20 @@ class Orb {
         this.yOff += this.inc;
     }
     render() {
-        if (this.graphics) {
             // update the PIXI.Graphics position and scale values
-            this.graphics.x = this.x;
-            this.graphics.y = this.y;
-            this.graphics.scale.set(this.scale);
+            this.graphics?.x = this.x;
+            this.graphics?.y = this.y;
+            this.graphics?.scale.set(this.scale);
 
             // clear anything currently drawn to graphics
-            this.graphics.clear();
+            this.graphics?.clear();
 
             // tell graphics to fill any shapes drawn after this with the orb's fill color
-            this.graphics.beginFill(this.fill);
+            this.graphics?.beginFill(this.fill);
             // draw a circle at { 0, 0 } with it's size set by this.radius
-            this.graphics.drawCircle(0, 0, this.radius);
+            this.graphics?.drawCircle(0, 0, this.radius);
             // let graphics know we won't be filling in any more shapes
-            this.graphics.endFill();
-        }
+            this.graphics?.endFill();
     }
 }
 
