@@ -279,9 +279,9 @@ export const startFancyBlur = (palette) => {
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         app.ticker.add(() => {
             // update and render each orb, each frame. app.ticker attempts to run at 60fps
-            orbs?.forEach((orb) => {
-                orb.update();
-                orb.render();
+            orbs.forEach((orb) => {
+                orb?.update();
+                orb?.render();
             });
         });
     } else {
