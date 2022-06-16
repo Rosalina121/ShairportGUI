@@ -152,7 +152,7 @@ class ColorPalette {
     constructor() {
         this.palette = {
             songColor: [254, 1, 193],
-            artistColor: [249, 212, 2],
+            brShadowColor: [249, 212, 2],
             borderColor: [0, 194, 255]
         };
         this.setColors();
@@ -162,7 +162,7 @@ class ColorPalette {
     setPalette(palette) {
         this.palette = palette;
         this.baseColor = this.palette.songColor;
-        this.complimentaryColor1 = this.palette.artistColor;
+        this.complimentaryColor1 = this.palette.brShadowColor;
         this.complimentaryColor2 = this.palette.borderColor;
     }
 
@@ -170,18 +170,18 @@ class ColorPalette {
         // initial colors
         const songColor = this.palette.songColor;
         console.log(songColor);
-        const artistColor = this.palette.brShadowColor;
-        console.log(artistColor);
+        const brShadowColor = this.palette.brShadowColor;
+        console.log(brShadowColor);
         const borderColor = this.palette.borderColor;
         console.log(borderColor);
 
         // TODO: rename cssVarToHSL to something true lol
         const songColorHSL = cssVarToHSL(songColor);
-        const artistColorHSL = cssVarToHSL(artistColor);
+        const brShadowColorHSL = cssVarToHSL(brShadowColor);
         const borderColorHSL = cssVarToHSL(borderColor);
 
         console.log(songColorHSL);
-        console.log(artistColorHSL);
+        console.log(brShadowColorHSL);
         console.log(borderColorHSL);
 
         this.baseColor = hsl(
@@ -190,9 +190,9 @@ class ColorPalette {
             borderColorHSL[2]
         );
         this.complimentaryColor1 = hsl(
-            artistColorHSL[0],
-            artistColorHSL[1],
-            artistColorHSL[2]
+            brShadowColorHSL[0],
+            brShadowColorHSL[1],
+            brShadowColorHSL[2]
         );
         this.complimentaryColor2 = hsl(
             songColorHSL[0],
