@@ -4,8 +4,10 @@ import SimplexNoise from "https://cdn.skypack.dev/simplex-noise";
 import hsl from "https://cdn.skypack.dev/hsl-to-hex";
 import debounce from "https://cdn.skypack.dev/debounce";
 
-const RGBToHSL = (r, g, b) => {
-    console.log(r + " " + g + "" + b);
+const RGBToHSL = (array) => {
+    let r = array[0];
+    let g = array[1];
+    let b = array[2];
     r /= 255;
     g /= 255;
     b /= 255;
@@ -18,7 +20,6 @@ const RGBToHSL = (r, g, b) => {
             ? 2 + (b - r) / s
             : 4 + (r - g) / s
         : 0;
-    console.log(h + " " + s + "" + l);
     return [
         60 * h < 0 ? 60 * h + 360 : 60 * h,
         100 * (s ? (l <= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0),
@@ -68,7 +69,7 @@ class Orb {
         this.xOff = random(0, 1000);
         this.yOff = random(0, 1000);
         // how quickly the noise/self similar random values step through time
-        this.inc = 0.00004;     // A.K.A. "speed"
+        this.inc = 0.00004; // A.K.A. "speed"
 
         // PIXI.Graphics is used to draw 2d primitives (in this case a circle) to the canvas
         this.graphics = new PIXI.Graphics();
@@ -141,79 +142,56 @@ class Orb {
     }
 }
 
-const cssVarToHSL = (colorFromRoot) => {
-    // const colorArray = colorFromRoot.split(",").map((item) => {
-    //     return parseInt(item, 10);
-    // });
-    return RGBToHSL(colorFromRoot[0], colorFromRoot[1], colorFromRoot[2]);
-};
-
 class ColorPalette {
     constructor() {
         this.palette = {
-            songColor: [254, 1, 193],
-            brShadowColor: [249, 212, 2],
-            borderColor: [0, 194, 255]
+            color1: [254, 1, 193],
+            color2: [249, 212, 2],
+            color3: [0, 194, 255]
         };
         this.setColors();
         // this.setCustomProperties();  // not needed coz already using global vars
     }
 
     setPalette(palette) {
+        // TODO: Change the palette to an array, coz there is so much hardcoded stuff in there
+        // this.color1 = this.palette.color1;
+        // this.color2 = this.palette.color2;
+        // this.color3 = this.palette.color3;
         this.palette = palette;
-        this.baseColor = this.palette.songColor;
-        this.complimentaryColor1 = this.palette.brShadowColor;
-        this.complimentaryColor2 = this.palette.borderColor;
+        this.color1 = this.palette.color1;
+        this.color2 = this.palette.color2;
+        this.color3 = this.palette.color3;
     }
 
     setColors() {
         // initial colors
-        const songColor = this.palette.songColor;
-        console.log(songColor);
-        const brShadowColor = this.palette.brShadowColor;
-        console.log(brShadowColor);
-        const borderColor = this.palette.borderColor;
-        console.log(borderColor);
+        const color1 = this.palette.color1;
+        const color2 = this.palette.color2;
+        const color3 = this.palette.color3;
 
-        // TODO: rename cssVarToHSL to something true lol
-        const songColorHSL = cssVarToHSL(songColor);
-        const brShadowColorHSL = cssVarToHSL(brShadowColor);
-        const borderColorHSL = cssVarToHSL(borderColor);
+        const color1HSL = RGBToHSL(color1);
+        const color2HSL = RGBToHSL(color2);
+        const color3HSL = RGBToHSL(color3);
 
-        console.log(songColorHSL);
-        console.log(brShadowColorHSL);
-        console.log(borderColorHSL);
-
-        this.baseColor = hsl(
-            borderColorHSL[0],
-            borderColorHSL[1],
-            borderColorHSL[2]
+        this.color1 = hsl(
+            color3HSL[0],
+            color3HSL[1],
+            color3HSL[2]
         );
-        this.complimentaryColor1 = hsl(
-            brShadowColorHSL[0],
-            brShadowColorHSL[1],
-            brShadowColorHSL[2]
+        this.color2 = hsl(
+            color2HSL[0],
+            color2HSL[1],
+            color2HSL[2]
         );
-        this.complimentaryColor2 = hsl(
-            songColorHSL[0],
-            songColorHSL[1],
-            songColorHSL[2]
+        this.color3 = hsl(
+            color1HSL[0], 
+            color1HSL[1], 
+            color1HSL[2]
         );
 
         // store the color choices in an array so that a random one can be picked later
-        this.colorChoices = [
-            this.baseColor,
-            this.complimentaryColor1,
-            this.complimentaryColor2
-        ];
-    }
-
-    updateColorChoices() {
-        this.colorChoices = [
-            this.baseColor,
-            this.complimentaryColor1,
-            this.complimentaryColor2
-        ];
+        this.colorChoices = [this.color1, this.color2, this.color3];
     }
 
     randomColor() {
@@ -223,20 +201,6 @@ class ColorPalette {
             "0x"
         );
     }
-
-    // may be useful in the future
-    // setCustomProperties() {
-    //     // set CSS custom properties so that the colors defined here can be used throughout the UI
-    //     document.documentElement.style.setProperty("--hue", this.hue);
-    //     document.documentElement.style.setProperty(
-    //         "--hue-complimentary1",
-    //         this.complimentaryHue1
-    //     );
-    //     document.documentElement.style.setProperty(
-    //         "--hue-complimentary2",
-    //         this.complimentaryHue2
-    //     );
-    // }
 }
 
 // Create PixiJS app
@@ -252,11 +216,9 @@ const app = new PIXI.Application({
 app.stage.filters = [new KawaseBlurFilter(70, 10, true)];
 
 const colorPalette = new ColorPalette();
-
 const orbs = [];
 
 export const startFancyBlur = () => {
-    console.log("startFancyBlur");
     document.querySelector(".background-img").style.display = "none";
 
     for (let i = 0; i < 10; i++) {
@@ -283,7 +245,6 @@ export const startFancyBlur = () => {
     }
 };
 export const updateColors = (palette) => {
-    console.log("updateColors");
     if (palette) {
         colorPalette.setPalette(palette);
         colorPalette.setColors();

@@ -51,7 +51,7 @@
 
 
 body {
-  background-color: var(--brShadowColor);
+  background-color: #fff;
   font-family: 'Public Sans', sans-serif;
   color: var(--songColor);
   overflow: hidden;
@@ -119,6 +119,7 @@ body {
 }
 
 .song-details {
+  background-blend-mode: exclusion;
   display: flex;
   flex-direction: column;
   text-overflow: ellipsis;

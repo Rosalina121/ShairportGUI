@@ -4,17 +4,61 @@ let backgroundType = "image";
 const imgContainer = document.querySelector(".background-img");
 
 let internalPalette = {};
+let isBright = true; // with placeholder image and other placeholder values it does not matter in init
 
 const applyPallette = (palette) => {
     internalPalette = palette;
-    console.log(internalPalette);
-    for (const color in palette) {
-        r.style.setProperty(`--${color}`, "rgb(" + palette[color] + ")");
-        console.log(`${color}: rgb(${palette[color]})`);
-        r.style.setProperty(`--${color}Raw`, palette[color]);
-        console.log(`${color}Raw: ${palette[color]}`);
+    r.style.setProperty(`--borderColorRaw`, palette.Vibrant.rgb);
+    if (isBright) {
+        r.style.setProperty(`--artistColorRaw`, palette.DarkMuted.rgb);
+        r.style.setProperty(`--songColorRaw`, palette.DarkVibrant.rgb);
+        r.style.setProperty(`--tlShadowColorRaw`, palette.LightVibrant.rgb);
+        r.style.setProperty(`--brShadowColorRaw`, palette.LightMuted.rgb);
+    } else {
+        r.style.setProperty(`--artistColorRaw`, palette.LightMuted.rgb);
+        r.style.setProperty(`--songColorRaw`, palette.LightVibrant.rgb);
+        r.style.setProperty(`--tlShadowColorRaw`, palette.DarkVibrant.rgb);
+        r.style.setProperty(`--brShadowColorRaw`, palette.DarkMuted.rgb);
     }
 };
+
+function getBrightness(imageSrc, callback) {
+    // TODO: use a promise, what year is it?
+    const img = document.createElement("img");
+    img.src = imageSrc;
+    img.crossOrigin = "anonymous";
+    img.style.display = "none";
+    document.body.appendChild(img);
+    let colorSum = 0;
+
+    img.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = this.width;
+        canvas.height = this.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(this, 0, 0);
+
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+        let r, g, b, avg;
+
+        for (let x = 0, len = data.length; x < len; x += 4) {
+            r = data[x];
+            g = data[x + 1];
+            b = data[x + 2];
+            avg = Math.floor((r + g + b) / 3);
+            colorSum += avg;
+        }
+
+        const brightness = Math.floor(colorSum / (this.width * this.height));
+        if (brightness > 127) {
+            isBright = true;
+        } else {
+            isBright = false;
+        }
+        callback(brightness);
+    };
+}
 
 const processTypes = (backgroundType) => {
     switch (backgroundType) {
@@ -108,7 +152,7 @@ const setBackgroundBlur = () => {
     // imgContainer.style.filter = "brightness(0.8)";
 };
 
-// get background type (either image, blur or blurHash) from browser local storage
+// get background type (either image, blur or fancy) from browser local storage
 const getBackgroundType = () => {
     let backgroundType = localStorage.getItem("backgroundType");
     if (backgroundType === null) {
@@ -142,14 +186,29 @@ const updateBackgroundImage = (pictureData) => {
     if (imgContainer.style.filter === "") {
         imgContainer.style.filter = "blur(70px)";
     }
-    console.log("background picture set!");
 };
 
-const updateBackgroundFancy = () => {
+const processPalette = () => {
+    // Yeah, I guess map would work here too
+    return isBright
+        ? {
+              color1: internalPalette.Vibrant.rgb,
+              color2: internalPalette.LightMuted.rgb,
+              color3: internalPalette.LightVibrant.rgb
+          }
+        : {
+              color1: internalPalette.Vibrant.rgb,
+              color2: internalPalette.DarkMuted.rgb,
+              color3: internalPalette.DarkVibrant.rgb
+          };
+};
+
+const updateBackgroundFancy = (processedPalette) => {
+    console.log("Processed palette", processedPalette);
     // I shouldn't have done that but it works
     import("./fancyBlur.js")
         .then(({ updateColors }) => {
-            updateColors(internalPalette);
+            updateColors(processedPalette);
         })
         .catch((error) => {
             console.error(error);
@@ -164,25 +223,40 @@ socket.on("metadata", (metadata) => {
     title.textContent = metadata.title;
     album.textContent = metadata.album;
     artist.textContent = metadata.artist;
-    console.log("data get!");
 });
 
 socket.on("pictureData", (pictureData) => {
-    console.log("picture get!");
     let img = document.querySelector("#cover");
     img.src = `data:image/png;base64,` + pictureData;
-    console.log("cover picture set!");
     updateBackground(backgroundType, pictureData);
+    getBrightness(img.src, (brightness) => {
+        console.log("Image brightness:" + brightness);
+        console.log(
+            "That means the image " + (isBright ? "is" : "is not") + " bright"
+        );
+        document.body.style.backgroundColor = isBright ? "white" : "black";
+    });
 });
 
 socket.on("palette", (palette) => {
-    console.log("palette get!");
+    // TODO:
+    // - palettes for each background type (bright or dark)
+    // Bright:
+    // - artist color (lightMuted)
+    // - song color (lightVibrant)
+    // Dark:
+    // - brShadow color (darkMuted)
+    // - tlShadow color (darkVibrant)
+    // Both:
+    // - border color (Vibrant)
+    // I thing this might be done both server and client side
+    // If server side, then palette will have like a bool
+    // if it's bright or dark
+    // Func will return a palette based on that, only for Fancy
     applyPallette(palette);
     if (backgroundType === "fancy") {
-        updateBackgroundFancy();
+        updateBackgroundFancy(processPalette());
     }
-    console.log("palette set!");
 });
 
 document.addEventListener("DOMContentLoaded", onInit, false);
-console.log("scripts loaded!");

@@ -18,22 +18,19 @@ const saveBase64ImageToDisk = (data, fileName) => {
     });
 };
 
+const checkIfImageIsBrightOrDark = (image) => {
+    // check if overall image luminance is bright or not
+    
+
+
+}
+
 const emitPalette = (io, image) => {
+    checkIfImageIsBrightOrDark(image);
     vibrant.from(image).getPalette((err, palette) => {
         // TODO: Add actual error handling
         if (!err) {
-            console.log("no error?");
-            console.log(palette);
-            console.log(err);
-            let paletteObj = {
-                borderColor: palette.Vibrant.rgb,
-                tlShadowColor: palette.DarkVibrant.rgb,
-                songColor: palette.LightVibrant.rgb,
-                brShadowColor: palette.DarkMuted.rgb,
-                artistColor: palette.LightMuted.rgb
-            };
-            console.log(paletteObj);
-            io.emit("palette", paletteObj);
+            io.emit("palette", palette);
         } else {
             console.error(err);
         }
@@ -52,7 +49,6 @@ export function emitSongCover(io, pictureData) {
     // save to disk and emit palette
     try {
         saveBase64ImageToDisk(base64, "./image.png").then((fileName) => {
-            console.log(fileName);
             // get palette
             emitPalette(io, fileName);
         });
