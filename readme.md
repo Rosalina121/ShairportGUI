@@ -96,6 +96,7 @@ They all have their pros and cons, but you can decide which you like the most by
 
 -   Sometimes, in very specific cases, the palette will be undefined and the app will crash. I will somehow handle this case in the future, but for now I recommend running it with a utility like [forever](https://www.npmjs.com/package/forever).
     -   I have to get to the bottom of this though. Goodbye Moonmen on Apple Music always triggers the crash. Perhaps it's jpg instead of png?
+-   After 1h Spotify token will expire. Restarting the app works fine, but it's not ideal.
 
 ## What's next?
 * Resize text if too big to fit
