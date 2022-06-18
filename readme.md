@@ -101,8 +101,6 @@ They all have their pros and cons, but you can decide which you like the most by
 * Resize text if too big to fit
 * Small and quick notification what background is selected on change (since in some cases they are indistinguishable)
 * Stopping the spinning animation once paused, and resume when played
-* Merging in [Spotify support](https://github.com/JaroslawPokropinski/ShairportGUI) (without Airplay) by [JaroslawPokropinski](https://github.com/JaroslawPokropinski).
-  * Note: Spotify works just fine if playing via Airplay. This fork brings in Spotify API into the play.
 * Representing progress via image border (think rounded progress bar)
 * Support for WS2812B LED strips (unsure if via this project, or a seperate one)
 * HomeKit lights support (but super far into the future as I don't even own a single RGB lightbulb)
