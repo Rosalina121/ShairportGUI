@@ -5,21 +5,33 @@ A nice web interface for showing the shairport-sync metadata.
 <table>
   <thead>
     <tr>
-      <th>Horizontal (Static Gradient)</th>
+      <th colspan="2">Horizontal (Static Gradient)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>
+      <td colspan="2">
         <image alt="Your Love is a Drug by Garoad" src="img/Screen1.png">
       </td>
     </tr>
     <tr>
-      <th>Horizontal (Blurred Image)</th>  
+      <th colspan="2">Horizontal (Blurred Image)</th>  
+    </tr>
+    <tr>
+      <td colspan="2">
+        <image alt="Myths You Forgot by Camellia and Toby Fox" src="img/Screen2.png">
+      </td>
+    </tr>
+    <tr>
+      <th>Horizontal (Fancy Dark)</th>  
+      <th>Horizontal (fancy Light)</th> 
     </tr>
     <tr>
       <td>
-        <image alt="Myths You Forgot by Camellia and Toby Fox" src="img/Screen2.png">
+        <image alt="Addict by Silva Hound" src="img/Screen3.jpeg">
+      </td>
+      <td>
+        <image alt="True colors by Zedd" src="img/Screen4.jpeg">
       </td>
     </tr>
   </tbody>
@@ -76,10 +88,9 @@ Currently 3 types of backgrounds are supported:
 * Blurred Image - the same image as on the cover, but blurred
 * Gradient - gradients generated from the color palette
 * Fancy - WebGL based background mimicking Apple Music blur and others
+  * Supports palette swapping for bright/dark album covers for greater visibility
 
 They all have their pros and cons, but you can decide which you like the most by clicking on the image to toggle between them (current selection is saved to local storage so you don't have to redo this every time).  
-Imo the text is most readable on the Gradient, but Fancy is, well, fancy. Looks super cool.
-Also Gradient havs some filters applied like `brightness(0.8)`. You can ofc adjust them to your liking.
 
 ## Known issues
 
