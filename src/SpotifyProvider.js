@@ -1,7 +1,7 @@
 import axios from "axios";
 import SpotifyWebApi from "spotify-web-api-node";
 import SongProvider from "./SongProvider";
-import { emitSongCover, emitSongMeta } from "./utils";
+import { emitSongCover, emitSongMeta, emitSongProgress } from "./utils";
 
 export default class SpotifyProvider extends SongProvider {
     constructor(io) {
@@ -51,7 +51,6 @@ export default class SpotifyProvider extends SongProvider {
                     track.body.item.type === "track"
                 ) {
                     currentSong = track.body.item.id;
-
                     emitSongMeta(
                         this.io,
                         track.body.item.name,
@@ -65,6 +64,12 @@ export default class SpotifyProvider extends SongProvider {
                         responseType: "arraybuffer"
                     });
                     emitSongCover(this.io, imageRes.data);
+
+                    // duration
+                    const duration = track.body?.item.duration_ms ?? 1000;
+                    const progress = track.body?.progress_ms ?? 0;
+                    const finalDuration = duration - progress;
+                    emitSongProgress(this.io, finalDuration/1000)
                 }
             } catch (err) {
                 console.log(err);

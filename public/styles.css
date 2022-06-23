@@ -15,6 +15,12 @@
 
   --brShadow: -3px 3px 7px rgba(var(--brShadowColorRaw), 0.5);
   --tlShadow: 3px -3px 7px rgba(var(--tlShadowColorRaw), 0.5);
+
+  --pgPercentage: 100;
+  --value: 100;
+  --animationDuration: 40s;
+  --progressBackground: #fff
+
 }
 
 /* change flex direction to column on portrait, adjust for needs */
@@ -28,12 +34,14 @@
   }
 
   .thumbnail-border {
-    width:  70vw !important;
+    width: 70vw !important;
     height: 70vw !important;
+    padding: 1vh !important;
   }
+
   .song-thumbnail {
     height: 70vw !important;
-    width:  70vw !important;
+    width: 70vw !important;
   }
 
   .song-title {
@@ -104,18 +112,46 @@ body {
   animation: spin 40s linear infinite;
 }
 
+@keyframes growProgressBar {
+  0% {
+    --pgPercentage: 0;
+  }
+
+  100% {
+    --pgPercentage: var(--value);
+  }
+}
+
+@property --pgPercentage {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+.animate {
+  animation: growProgressBar var(--animationDuration) 1 linear;
+}
+
+.paused {
+  animation-play-state: paused;
+}
+
 .thumbnail-border {
+  --pgPercentage: var(--value);
+  background:
+    radial-gradient(closest-side, var(--progressBackground) 80%, transparent 0 99.9%),
+    conic-gradient(var(--borderColor) calc(var(--pgPercentage) * 1%), var(--progressBackground) 0);
+
   display: flex;
   width: 40vw;
   height: 40vw;
   border-radius: 50%;
-  padding: 0.5vw;
-  background-color: var(--borderColor);
+  padding: 1vw;
   box-shadow: inset 6px 6px 20px 0 rgba(var(--brShadowColorRaw), 0.2),
     0px 4px 20px rgba(var(--brShadowColorRaw), 0.1),
     0px 8px 24px rgba(var(--brShadowColorRaw), 0.1),
     0px 16px 45px rgba(var(--tlShadowColorRaw), 0.4);
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .song-details {

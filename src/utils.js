@@ -20,10 +20,7 @@ const saveBase64ImageToDisk = (data, fileName) => {
 
 const checkIfImageIsBrightOrDark = (image) => {
     // check if overall image luminance is bright or not
-    
-
-
-}
+};
 
 const emitPalette = (io, image) => {
     checkIfImageIsBrightOrDark(image);
@@ -56,4 +53,8 @@ export function emitSongCover(io, pictureData) {
     } catch (err) {
         console.log(err);
     }
+}
+
+export function emitSongProgress(io, progress) {
+    io.emit("progress", progress);
 }

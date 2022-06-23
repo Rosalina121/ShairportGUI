@@ -215,6 +215,39 @@ const updateBackgroundFancy = (processedPalette) => {
         });
 };
 
+// flow: set duration -> start animation -> removeAnimation -> repeat
+
+const setProgressAnimationDuration = (duration) => {
+    // sets duration in seconds
+    r.style.setProperty(`--animationDuration`, `${duration}s`);
+};
+
+const startProgressAnimation = () => {
+    document.querySelector(".thumbnail-border").classList.add("animate");
+};
+
+const removeProgressAnimation = () => {
+    document.querySelector(".thumbnail-border").classList.remove("animate");
+};
+
+const pauseProgressAnimationAndCover = () => {
+    document.querySelector(".thumbnail-border").classList.add("paused");
+    document.querySelector(".song-thumbnail").classList.add("paused");
+};
+
+const resumeProgressAnimationAndCover = () => {
+    document.querySelector(".thumbnail-border").classList.remove("animate");
+    document.querySelector(".song-thumbnail").classList.remove("animate");
+};
+
+const restartAnimation = (duration) => {
+    removeProgressAnimation();
+    setTimeout(() => {
+        setProgressAnimationDuration(duration);
+        startProgressAnimation();
+    }, 10);
+};
+
 let socket = io();
 socket.on("metadata", (metadata) => {
     let title = document.querySelector("#title");
@@ -223,6 +256,11 @@ socket.on("metadata", (metadata) => {
     title.textContent = metadata.title;
     album.textContent = metadata.album;
     artist.textContent = metadata.artist;
+    // placeholder duration until I find out how to handle
+    // AirPlay and Spotify durations (should be in meta tho)
+    // thing is, shairplay sends meta several times at the start
+    // Wonder if I can tak remaining duration instead of total
+    restartAnimation(180);
 });
 
 socket.on("pictureData", (pictureData) => {
@@ -235,28 +273,23 @@ socket.on("pictureData", (pictureData) => {
             "That means the image " + (isBright ? "is" : "is not") + " bright"
         );
         document.body.style.backgroundColor = isBright ? "white" : "black";
+        r.style.setProperty(
+            `--progressBackground`,
+            isBright ? "#ffffffAA" : "#000000AA"
+        );
     });
 });
 
 socket.on("palette", (palette) => {
-    // TODO:
-    // - palettes for each background type (bright or dark)
-    // Bright:
-    // - artist color (lightMuted)
-    // - song color (lightVibrant)
-    // Dark:
-    // - brShadow color (darkMuted)
-    // - tlShadow color (darkVibrant)
-    // Both:
-    // - border color (Vibrant)
-    // I thing this might be done both server and client side
-    // If server side, then palette will have like a bool
-    // if it's bright or dark
-    // Func will return a palette based on that, only for Fancy
     applyPallette(palette);
     if (backgroundType === "fancy") {
         updateBackgroundFancy(processPalette());
     }
+});
+
+socket.on("progress", (progress) => {
+    console.log("Progress", progress);
+    restartAnimation(progress != 1 ? progress : 180);   // fallback value
 });
 
 document.addEventListener("DOMContentLoaded", onInit, false);

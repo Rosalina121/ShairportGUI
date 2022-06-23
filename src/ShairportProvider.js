@@ -1,6 +1,6 @@
 import SongProvider from "./SongProvider";
 import ShairportReader from "shairport-sync-reader";
-import { emitSongCover, emitSongMeta } from "./utils";
+import { emitSongCover, emitSongMeta, emitSongProgress } from "./utils";
 
 export default class ShairportProvider extends SongProvider {
     constructor(io, path) {
@@ -21,6 +21,10 @@ export default class ShairportProvider extends SongProvider {
             console.log(pictureData);
             // pirctureData to base64
             emitSongCover(io, pictureData);
+        });
+        this.pipeReader.on("prgr", function (progress) {
+            console.log("Progress: " + progress);
+            emitSongProgress(io, progress);
         });
     }
 }
