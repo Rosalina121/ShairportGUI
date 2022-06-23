@@ -58,7 +58,7 @@ Built using:
 -   [George Francis' Generative Landing Page & WebGL Powered Background](https://georgefrancis.dev/writing/create-a-generative-landing-page-and-webgl-powered-background/)
 -   the mighty power of `F L E X B O X`
 
-This project is inspired by [Shairport Sync Metadata Display](https://github.com/AlainGourves/shairport-metadata-display) and works similarly, but without any fancy transitions. And has less features ofc (though one might argue if fancy looks are better than music controls).
+This project is inspired by [Shairport Sync Metadata Display](https://github.com/AlainGourves/shairport-metadata-display) and works similarly, but without any fancy transitions.
 
 ## Prerequisites
 
