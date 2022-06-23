@@ -1,6 +1,6 @@
 # ShairportGUI
 
-A nice web interface for showing the shairport-sync metadata.
+A nice web interface for showing the shairport-sync metadata (and Spotify too now!).
 
 <table>
   <thead>
