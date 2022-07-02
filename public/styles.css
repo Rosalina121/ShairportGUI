@@ -122,6 +122,13 @@ body {
   }
 }
 
+/*
+  Note:
+  Supported only by Chromium
+  Fallback is just a regular border
+  Sorry Firefox users :(
+*/
+
 @property --pgPercentage {
   syntax: '<number>';
   inherits: false;

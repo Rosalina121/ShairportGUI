@@ -1,6 +1,8 @@
 import fs from "fs";
 import vibrant from "node-vibrant";
 
+let previousPalette = {};
+
 const removeBrackets = (str) => {
     str = str.replace(/\[[^]*\]/, "");
     return str.replace(/\([^]*\)/, "");
@@ -25,11 +27,10 @@ const checkIfImageIsBrightOrDark = (image) => {
 const emitPalette = (io, image) => {
     checkIfImageIsBrightOrDark(image);
     vibrant.from(image).getPalette((err, palette) => {
-        // TODO: Add actual error handling
-        if (!err) {
+        // palette should be same for same images on a single machine, should...
+        if (previousPalette !== palette) {
+            previousPalette = palette;
             io.emit("palette", palette);
-        } else {
-            console.error(err);
         }
     });
 };

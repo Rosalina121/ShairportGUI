@@ -4,6 +4,7 @@ let backgroundType = "image";
 const imgContainer = document.querySelector(".background-img");
 
 let internalPalette = {};
+let oldFancyColors = {};
 let isBright = true; // with placeholder image and other placeholder values it does not matter in init
 
 const applyPallette = (palette) => {
@@ -204,15 +205,19 @@ const processPalette = () => {
 };
 
 const updateBackgroundFancy = (processedPalette) => {
+    console.log("Previous Fancy palette", oldFancyColors);
     console.log("Processed palette", processedPalette);
-    // I shouldn't have done that but it works
-    import("./fancyBlur.js")
-        .then(({ updateColors }) => {
-            updateColors(processedPalette);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+    if (JSON.stringify(oldFancyColors) !== JSON.stringify(processedPalette)) {
+        oldFancyColors = processedPalette;
+        // I shouldn't have done that but it works
+        import("./fancyBlur.js")
+            .then(({ updateColors }) => {
+                updateColors(processedPalette);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
 };
 
 // flow: set duration -> start animation -> removeAnimation -> repeat
@@ -289,7 +294,7 @@ socket.on("palette", (palette) => {
 
 socket.on("progress", (progress) => {
     console.log("Progress", progress);
-    restartAnimation(progress != 1 ? progress : 180);   // fallback value
+    restartAnimation(progress != 1 ? progress : 180); // fallback value
 });
 
 document.addEventListener("DOMContentLoaded", onInit, false);
