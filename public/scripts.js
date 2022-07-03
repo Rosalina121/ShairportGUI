@@ -241,8 +241,8 @@ const pauseProgressAnimationAndCover = () => {
 };
 
 const resumeProgressAnimationAndCover = () => {
-    document.querySelector(".thumbnail-border").classList.remove("animate");
-    document.querySelector(".song-thumbnail").classList.remove("animate");
+    document.querySelector(".thumbnail-border").classList.remove("paused");
+    document.querySelector(".song-thumbnail").classList.remove("paused");
 };
 
 const restartAnimation = (duration) => {
@@ -261,10 +261,7 @@ socket.on("metadata", (metadata) => {
     title.textContent = metadata.title;
     album.textContent = metadata.album;
     artist.textContent = metadata.artist;
-    // placeholder duration until I find out how to handle
-    // AirPlay and Spotify durations (should be in meta tho)
-    // thing is, shairplay sends meta several times at the start
-    // Wonder if I can tak remaining duration instead of total
+    // placeholder duration in case the retrieval fails
     restartAnimation(180);
 });
 
@@ -295,6 +292,14 @@ socket.on("palette", (palette) => {
 socket.on("progress", (progress) => {
     console.log("Progress", progress);
     restartAnimation(progress != 1 ? progress : 180); // fallback value
+});
+
+socket.on("playing", (playing) => {
+    if (playing) {
+        resumeProgressAnimationAndCover();
+    } else {
+        pauseProgressAnimationAndCover();
+    }
 });
 
 document.addEventListener("DOMContentLoaded", onInit, false);

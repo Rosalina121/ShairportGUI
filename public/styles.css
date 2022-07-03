@@ -20,7 +20,6 @@
   --value: 100;
   --animationDuration: 40s;
   --progressBackground: #fff
-
 }
 
 /* change flex direction to column on portrait, adjust for needs */
@@ -31,6 +30,9 @@
 
   .song-details {
     width: auto !important;
+    text-align: center;
+    padding-left: 1vw;
+    padding-right: 1vw;
   }
 
   .thumbnail-border {
@@ -63,6 +65,7 @@ body {
   font-family: 'Public Sans', sans-serif;
   color: var(--songColor);
   overflow: hidden;
+  margin: 0;
 }
 
 .orb-canvas {
@@ -162,7 +165,6 @@ body {
 }
 
 .song-details {
-  background-blend-mode: exclusion;
   display: flex;
   flex-direction: column;
   text-overflow: ellipsis;
@@ -170,8 +172,8 @@ body {
   white-space: normal;
   text-shadow: var(--brShadow), var(--tlShadow);
   overflow: visible;
-  width: 30%;
-  /* Hardcoded width cause text move the thumbnail away */
+  width: 35%;
+  /* Hardcoded width cause text moves the thumbnail away */
 }
 
 .song-title {

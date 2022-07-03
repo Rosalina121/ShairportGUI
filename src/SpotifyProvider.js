@@ -1,7 +1,12 @@
 import axios from "axios";
 import SpotifyWebApi from "spotify-web-api-node";
 import SongProvider from "./SongProvider";
-import { emitSongCover, emitSongMeta, emitSongProgress } from "./utils";
+import {
+    emitSongCover,
+    emitSongMeta,
+    emitSongProgress,
+    emitSongPlaying
+} from "./utils";
 
 export default class SpotifyProvider extends SongProvider {
     constructor(io) {
@@ -44,6 +49,13 @@ export default class SpotifyProvider extends SongProvider {
         setInterval(async () => {
             try {
                 const track = await this.spotifyApi.getMyCurrentPlayingTrack();
+                if (track.body) {
+                    // is paused?
+                    const isPlaying = track.body.is_playing === true;
+                    if (isPlaying != null) {
+                        emitSongPlaying(this.io, isPlaying);
+                    }
+                }
                 if (
                     track.body &&
                     track.body.item &&
@@ -69,7 +81,7 @@ export default class SpotifyProvider extends SongProvider {
                     const duration = track.body?.item.duration_ms ?? 1000;
                     const progress = track.body?.progress_ms ?? 0;
                     const finalDuration = duration - progress;
-                    emitSongProgress(this.io, finalDuration/1000)
+                    emitSongProgress(this.io, finalDuration / 1000);
                 }
             } catch (err) {
                 console.log(err);

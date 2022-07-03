@@ -59,3 +59,7 @@ export function emitSongCover(io, pictureData) {
 export function emitSongProgress(io, progress) {
     io.emit("progress", progress);
 }
+
+export function emitSongPlaying(io, playing) {
+    io.emit("playing", playing);
+}
