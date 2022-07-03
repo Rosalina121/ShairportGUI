@@ -91,6 +91,7 @@ They all have their pros and cons, but you can decide which you like the most by
 * Stopping the spinning animation once paused, and resume when played (Spotify is done, Shairport in progress)
 * Support for WS2812B LED strips (unsure if via this project, or a seperate one)
 * HomeKit lights support (but super far into the future as I don't even own a single RGB lightbulb)
+* Other providers (like Pandora or Tidal). This is however somewhat easy to do right now if you know the API, as the sockets are universal for providers.
 
 ## Notes
 
