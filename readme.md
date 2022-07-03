@@ -62,6 +62,7 @@ $ npm start
 |Song cover|✅|✅|
 |Song progress|❌|✅|
 |Play/pause support|❌|✅|
+
 Usually the ❌s are in progress.
 ### Playback
 Using the shairport-sync-reader you get track title, album, artist and an image. There's a whole lot more metadata available so you can easily add your own favorite info, but I didn't need that, so it's not used.
