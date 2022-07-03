@@ -107,10 +107,8 @@ They all have their pros and cons, but you can decide which you like the most by
 -   After 1h Spotify token will expire. Restarting the app works fine, but it's not ideal.
 
 ## What's next?
-* Resize text if too big to fit
 * Small and quick notification what background is selected on change (since in some cases they are indistinguishable)
-* Stopping the spinning animation once paused, and resume when played
-* Representing progress via image border (think rounded progress bar)
+* Stopping the spinning animation once paused, and resume when played (Spotify is done, Shairport in progress)
 * Support for WS2812B LED strips (unsure if via this project, or a seperate one)
 * HomeKit lights support (but super far into the future as I don't even own a single RGB lightbulb)
 
