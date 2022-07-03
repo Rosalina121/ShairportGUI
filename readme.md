@@ -27,6 +27,9 @@ A nice web interface for showing the shairport-sync metadata (and Spotify too no
 
 <sub><sup>I don't now how to neatly embed videos into markdown. Gifs work fine, but look deepfried</sup></sub>
 
+[Doom Crossing: Eternal Horizons by The Chalkeaters](https://user-images.githubusercontent.com/15912902/177040000-b2b88ede-eff9-4d05-8dc1-fa3c4030299e.webm)
+
+
 ## What did I use?
 
 Built using:
