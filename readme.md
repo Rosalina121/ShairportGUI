@@ -5,7 +5,7 @@ A nice web interface for showing the shairport-sync metadata (and Spotify too no
 <table>
   <thead>
     <tr>
-      <th colspan="2">Horizontal (Static Gradient)</th>
+      <th colspan="2">Horizontal (Fancy dark)</th>
     </tr>
   </thead>
   <tbody>
@@ -15,35 +15,17 @@ A nice web interface for showing the shairport-sync metadata (and Spotify too no
       </td>
     </tr>
     <tr>
-      <th colspan="2">Horizontal (Blurred Image)</th>  
+      <th colspan="2">Horizontal (Fancy light)</th>  
     </tr>
     <tr>
       <td colspan="2">
         <image alt="Myths You Forgot by Camellia and Toby Fox" src="img/Screen2.png">
       </td>
     </tr>
-    <tr>
-      <th>Horizontal (Fancy Dark)</th>  
-      <th>Horizontal (fancy Light)</th> 
-    </tr>
-    <tr>
-      <td>
-        <image alt="Addict by Silva Hound" src="img/Screen3.jpeg">
-      </td>
-      <td>
-        <image alt="True colors by Zedd" src="img/Screen4.jpeg">
-      </td>
-    </tr>
   </tbody>
 </table>
 
 <sub><sup>I don't now how to neatly embed videos into markdown. Gifs work fine, but look deepfried</sup></sub>
-
-
-
-https://user-images.githubusercontent.com/15912902/174100762-d2bc8a1c-b0d7-4d5e-be15-620088be592d.mp4
-
-https://user-images.githubusercontent.com/15912902/174100872-cc56eed9-d6cd-4047-8728-b6900e52287b.mp4
 
 ## What did I use?
 
