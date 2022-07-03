@@ -60,8 +60,9 @@ $ npm start
 |:---|:---:|:---:|
 |Song metadata|✅|✅|
 |Song cover|✅|✅|
-|Song progress|❌|✅|
+|Song (inital) progress|❌|✅|
 |Play/pause support|❌|✅|
+|Seeking|❌|❌|
 
 Usually the ❌s are in progress.
 ### Playback
