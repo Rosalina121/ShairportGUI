@@ -65,10 +65,11 @@ $ npm start
 |Song metadata|✅|✅|
 |Song cover|✅|✅|
 |Song (inital) progress|❌|✅|
-|Play/pause support|❌|✅|
-|Seeking|❌|❌|
+|Play/pause support*|❌|✅|
+|Seeking*|❌|❌|
 
-Usually the ❌s are in progress.
+Usually the ❌s are in progress.  
+*Only visual feedback, not controls
 ### Playback
 Using the shairport-sync-reader you get track title, album, artist and an image. There's a whole lot more metadata available so you can easily add your own favorite info, but I didn't need that, so it's not used.
 ### Spotify
