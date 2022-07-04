@@ -31,7 +31,7 @@ A nice web interface for showing the shairport-sync metadata (and Spotify too no
 
 Built using:
 
--   Node.js
+-   Node.js 18.1.0
 -   [shairport-sync-reader](https://www.npmjs.com/package/shairport-sync-reader)
 -   socket.io
 -   [node-vibrant](https://www.npmjs.com/package/node-vibrant)
@@ -44,8 +44,12 @@ This project is inspired by [Shairport Sync Metadata Display](https://github.com
 
 ## Prerequisites
 
--   [shairport-sync](https://github.com/mikebrady/shairport-sync) build with `--with-metadata` option and configured, obviously. Preferably under some Linux distro as that's what the project's been written under. Unless you understand Cygwin pipes. Then teach me. Or you got the UDP working, then it should run just fine under Windows.
--   Node.js - used 18.1.0, other versions should also work.
+-   Node.js - used 18.1.0, other versions should also work
+
+### Shairport
+-   [shairport-sync](https://github.com/mikebrady/shairport-sync) build with `--with-metadata` option and configured, obviously. Preferably under some Linux distro as that's what the project's been written under. Unless you understand Cygwin pipes. Then teach me. Or you got the UDP working, then it should run just fine under Windows
+### Spotify
+- just the WebAPI token
 
 ## Run
 
@@ -76,23 +80,24 @@ The current `@media` query might not fit your needs though, but you can easily c
 Currently 3 types of backgrounds are supported:
 * Blurred Image - the same image as on the cover, but blurred
 * Gradient - gradients generated from the color palette
-* Fancy - WebGL based background mimicking Apple Music blur and others
-  * Supports palette swapping for bright/dark album covers for greater visibility
+* Fancy - WebGL based background mimicking Apple Music blur and others (personal favorite)
+
+All support palette swapping for bright/dark album covers for greater visibility.  
 
 They all have their pros and cons, but you can decide which you like the most by clicking on the image to toggle between them (current selection is saved to local storage so you don't have to redo this every time).  
 
 ## Known issues
 
--   Sometimes, in very specific cases, the palette will be undefined and the app will crash. I will somehow handle this case in the future, but for now I recommend running it with a utility like [forever](https://www.npmjs.com/package/forever).
+-   Sometimes, in very specific cases, the palette will be undefined and the app will crash. I will somehow handle this case in the future, but for now I recommend running it with a utility like [forever](https://www.npmjs.com/package/forever)
     -   I have to get to the bottom of this though. Goodbye Moonmen on Apple Music always triggers the crash. Perhaps it's jpg instead of png?
--   After 1h Spotify token will expire. Restarting the app works fine, but it's not ideal.
+-   After 1h Spotify token will expire. Restarting the app works fine, but it's not ideal
 
 ## What's next?
 * Small and quick notification what background is selected on change (since in some cases they are indistinguishable)
 * Stopping the spinning animation once paused, and resume when played (Spotify is done, Shairport in progress)
 * Support for WS2812B LED strips (unsure if via this project, or a seperate one)
 * HomeKit lights support (but super far into the future as I don't even own a single RGB lightbulb)
-* Other providers (like Pandora or Tidal). This is however somewhat easy to do right now if you know the API, as the sockets are universal for providers.
+* Other providers (like Pandora or Tidal). This is however somewhat easy to do right now if you know the API, as the sockets are universal for providers
 
 ## Notes
 
