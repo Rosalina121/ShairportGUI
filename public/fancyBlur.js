@@ -1,6 +1,6 @@
 import * as PIXI from "https://cdn.skypack.dev/pixi.js";
 import { KawaseBlurFilter } from "https://cdn.skypack.dev/@pixi/filter-kawase-blur";
-import SimplexNoise from "https://cdn.skypack.dev/simplex-noise";
+import { createNoise2D } from "https://cdn.skypack.dev/simplex-noise";
 import hsl from "https://cdn.skypack.dev/hsl-to-hex";
 import debounce from "https://cdn.skypack.dev/debounce";
 
@@ -28,7 +28,7 @@ const RGBToHSL = (array) => {
 };
 
 // Create a new simplex noise instance
-const simplex = new SimplexNoise();
+const noise2D = createNoise2D();
 
 // return a random number within a range
 function random(min, max) {
@@ -110,9 +110,9 @@ class Orb {
     }
     update() {
         // self similar "psuedo-random" or noise values at a given point in "time"
-        const xNoise = simplex.noise2D(this.xOff, this.xOff);
-        const yNoise = simplex.noise2D(this.yOff, this.yOff);
-        const scaleNoise = simplex.noise2D(this.xOff, this.yOff);
+        const xNoise = noise2D(this.xOff, this.xOff);
+        const yNoise = noise2D(this.yOff, this.yOff);
+        const scaleNoise = noise2D(this.xOff, this.yOff);
 
         // map the xNoise/yNoise values (between -1 and 1) to a point within the orb's bounds
         this.x = map(xNoise, -1, 1, this.bounds["x"].min, this.bounds["x"].max);
@@ -174,21 +174,9 @@ class ColorPalette {
         const color2HSL = RGBToHSL(color2);
         const color3HSL = RGBToHSL(color3);
 
-        this.color1 = hsl(
-            color3HSL[0],
-            color3HSL[1],
-            color3HSL[2]
-        );
-        this.color2 = hsl(
-            color2HSL[0],
-            color2HSL[1],
-            color2HSL[2]
-        );
-        this.color3 = hsl(
-            color1HSL[0], 
-            color1HSL[1], 
-            color1HSL[2]
-        );
+        this.color1 = hsl(color3HSL[0], color3HSL[1], color3HSL[2]);
+        this.color2 = hsl(color2HSL[0], color2HSL[1], color2HSL[2]);
+        this.color3 = hsl(color1HSL[0], color1HSL[1], color1HSL[2]);
 
         // store the color choices in an array so that a random one can be picked later
         this.colorChoices = [this.color1, this.color2, this.color3];

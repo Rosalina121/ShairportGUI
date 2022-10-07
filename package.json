@@ -4,7 +4,6 @@
     "description": "Web-based GUI server (lol) for shairport-sync",
     "main": "src/index.js",
     "scripts": {
-        "startPi": "./replace.sh && ts-node src/index.js",
         "start": "ts-node src/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
