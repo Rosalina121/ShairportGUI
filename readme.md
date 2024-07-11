@@ -35,7 +35,7 @@ Built using:
 -   [shairport-sync-reader](https://www.npmjs.com/package/shairport-sync-reader)
 -   socket.io
 -   [node-vibrant](https://www.npmjs.com/package/node-vibrant)
--   GitHub Copilot (because I'm learning Node)
+-   ~~GitHub Copilot (because I'm learning Node)~~ NO DON'T DO THAT YOU WON'T LEARN ANYTHING AI IS A DISGRACE AND KILLS THE PLANET
 -   parts of CSS from [neumorphism, pure css](https://codepen.io/b-r-y/pen/wvrXdEd) by Bryanna Lucyk (though after some refactorings I mainly use the neumorphic drop-shadows)
 -   [George Francis' Generative Landing Page & WebGL Powered Background](https://georgefrancis.dev/writing/create-a-generative-landing-page-and-webgl-powered-background/)
 -   the mighty power of `F L E X B O X`
