@@ -5,7 +5,7 @@ const imgContainer = document.querySelector(".background-img");
 
 let internalPalette = {};
 let oldFancyColors = {};
-let isBright = true; // with placeholder image and other placeholder values it does not matter in init
+let isBright = true;
 
 const applyPallette = (palette) => {
     internalPalette = palette;
@@ -24,7 +24,6 @@ const applyPallette = (palette) => {
 };
 
 function getBrightness(imageSrc, callback) {
-    // TODO: use a promise, what year is it?
     const img = document.createElement("img");
     img.src = imageSrc;
     img.crossOrigin = "anonymous";
@@ -81,6 +80,7 @@ const processTypes = (backgroundType) => {
 const onInit = () => {
     backgroundType = getBackgroundType();
     processTypes(backgroundType);
+    initOptions();
 };
 
 const changeStyle = (backgroundTypeVar) => {
@@ -90,7 +90,6 @@ const changeStyle = (backgroundTypeVar) => {
     backgroundType = backgroundTypeVar;
 };
 
-// toggle background styles between image, blur and blurHash
 const toggleBackgroundType = () => {
     const backgroundType = getBackgroundType();
     if (backgroundType === "image") {
@@ -123,8 +122,6 @@ const setBackgroundImage = () => {
 const setBackgroundFancy = () => {
     document.querySelector(".orb-canvas").style.removeProperty("display");
     document.querySelector(".background-img").style.display = "none";
-    // I shouldn't have done that but it works
-    // also, should add handling if fancy has been already set
     import("./fancyBlur.js")
         .then(({ startFancyBlur }) => {
             startFancyBlur();
@@ -150,10 +147,8 @@ const setBackgroundBlur = () => {
       radial-gradient(circle at bottom right,
         rgba(var(--brShadowColorRaw), 1),
         rgba(255, 255, 255, 0) 60%)`;
-    // imgContainer.style.filter = "brightness(0.8)";
 };
 
-// get background type (either image, blur or fancy) from browser local storage
 const getBackgroundType = () => {
     let backgroundType = localStorage.getItem("backgroundType");
     if (backgroundType === null) {
@@ -173,17 +168,12 @@ const updateBackground = (backgroundType, pictureData) => {
             updateBackgroundImage(pictureData);
             break;
         default:
-            // basically blur, do nothing as blur uses palette colors
-            // fancy too
-            // this can be an if statement,
-            // but I'm leaving this in case I want to add more background types
             break;
     }
 };
 
 const updateBackgroundImage = (pictureData) => {
     imgContainer.style.backgroundImage = `url(data:image/png;base64,${pictureData})`;
-    // fot initial load
     if (imgContainer.style.filter === "") {
         imgContainer.style.filter = "blur(70px)";
     }
@@ -209,7 +199,6 @@ const updateBackgroundFancy = (processedPalette) => {
     console.log("Processed palette", processedPalette);
     if (JSON.stringify(oldFancyColors) !== JSON.stringify(processedPalette)) {
         oldFancyColors = processedPalette;
-        // I shouldn't have done that but it works
         import("./fancyBlur.js")
             .then(({ updateColors }) => {
                 updateColors(processedPalette);
@@ -220,10 +209,80 @@ const updateBackgroundFancy = (processedPalette) => {
     }
 };
 
-// flow: set duration -> start animation -> removeAnimation -> repeat
+// Options Logic
+const initOptions = () => {
+    const optionsBtn = document.querySelector("#options-btn");
+    const optionsMenu = document.querySelector("#options-menu");
+    const spinToggle = document.querySelector("#spin-toggle");
+    const shapeSelect = document.querySelector("#shape-select");
+
+    // Load preferences
+    const isSpinning = localStorage.getItem("coverSpinning") !== "false";
+    const coverShape = localStorage.getItem("coverShape") || "circle";
+
+    spinToggle.checked = isSpinning;
+    shapeSelect.value = coverShape;
+
+    spinToggle.disabled = coverShape !== "circle";
+
+    applySpinning(isSpinning);
+    applyShape(coverShape);
+
+    optionsBtn.onclick = (e) => {
+        e.stopPropagation();
+        optionsMenu.classList.toggle("visible");
+    };
+
+    document.addEventListener("click", (e) => {
+        if (!optionsMenu.contains(e.target) && e.target !== optionsBtn) {
+            optionsMenu.classList.remove("visible");
+        }
+    });
+
+    spinToggle.onchange = (e) => {
+        const spinning = e.target.checked;
+        localStorage.setItem("coverSpinning", spinning);
+        applySpinning(spinning);
+    };
+
+    shapeSelect.onchange = (e) => {
+        const shape = e.target.value;
+        localStorage.setItem("coverShape", shape);
+        spinToggle.disabled = shape !== "circle";
+        applyShape(shape);
+    };
+};
+
+const applySpinning = (isSpinning) => {
+    const container = document.querySelector("#spin-container");
+    const shape = localStorage.getItem("coverShape") || "circle";
+    
+    if (isSpinning && shape === "circle") {
+        container.classList.add("spinning");
+    } else {
+        container.classList.remove("spinning");
+    }
+};
+
+const applyShape = (shape) => {
+    const cover = document.querySelector("#cover");
+    const container = document.querySelector("#thumbnail-container");
+    const spinContainer = document.querySelector("#spin-container");
+    
+    cover.classList.remove("circle", "rounded-square");
+    container.classList.remove("circle", "rounded-square");
+    spinContainer.classList.remove("circle", "rounded-square");
+    
+    cover.classList.add(shape);
+    container.classList.add(shape);
+    spinContainer.classList.add(shape);
+    
+    const isSpinning = localStorage.getItem("coverSpinning") !== "false";
+    applySpinning(isSpinning);
+};
+
 
 const setProgressAnimationDuration = (duration) => {
-    // sets duration in seconds
     r.style.setProperty(`--animationDuration`, `${duration}s`);
 };
 
@@ -233,24 +292,26 @@ const startProgressAnimation = () => {
 
 const removeProgressAnimation = () => {
     document.querySelector(".thumbnail-border").classList.remove("animate");
+    r.style.setProperty(`--animationCurrent`, `0s`);
 };
 
 const pauseProgressAnimationAndCover = () => {
     document.querySelector(".thumbnail-border").classList.add("paused");
-    document.querySelector(".song-thumbnail").classList.add("paused");
+    document.querySelector("#spin-container").classList.add("paused");
 };
 
 const resumeProgressAnimationAndCover = () => {
     document.querySelector(".thumbnail-border").classList.remove("paused");
-    document.querySelector(".song-thumbnail").classList.remove("paused");
+    document.querySelector("#spin-container").classList.remove("paused");
 };
 
 const restartAnimation = (duration) => {
-    removeProgressAnimation();
-    setTimeout(() => {
-        setProgressAnimationDuration(duration);
-        startProgressAnimation();
-    }, 10);
+    const border = document.querySelector(".thumbnail-border");
+    border.classList.remove("animate");
+    r.style.setProperty(`--animationCurrent`, `0s`);
+    r.style.setProperty(`--animationDuration`, `${duration}s`);
+    void border.offsetWidth;
+    border.classList.add("animate");
 };
 
 let socket = io();
@@ -261,8 +322,9 @@ socket.on("metadata", (metadata) => {
     title.textContent = metadata.title;
     album.textContent = metadata.album;
     artist.textContent = metadata.artist;
-    // placeholder duration in case the retrieval fails
-    restartAnimation(180);
+    
+    document.title = `${metadata.title} | ShairportGUI`;
+    
 });
 
 socket.on("pictureData", (pictureData) => {
@@ -289,9 +351,35 @@ socket.on("palette", (palette) => {
     }
 });
 
-socket.on("progress", (progress) => {
-    console.log("Progress", progress);
-    restartAnimation(progress != 1 ? progress : 180); // fallback value
+let currentDuration = 0;
+let lastProgressTime = 0;
+let lastProgressRealTime = 0;
+
+socket.on("progress", (data) => {
+    const border = document.querySelector(".thumbnail-border");
+    if (typeof data === 'object' && data !== null) {
+        if (data.duration > 0) {
+            const expectedCurrent = lastProgressTime + (Date.now() - lastProgressRealTime) / 1000;
+            const isDesynced = Math.abs(data.current - expectedCurrent) > 1.5;
+            const durationChanged = Math.abs(data.duration - currentDuration) > 1;
+            
+            if (!border.classList.contains("animate") || isDesynced || durationChanged) {
+                border.classList.remove("animate");
+                r.style.setProperty(`--animationDuration`, `${data.duration}s`);
+                r.style.setProperty(`--animationCurrent`, `${data.current}s`);
+                
+                void border.offsetWidth;
+                border.classList.add("animate");
+                
+                currentDuration = data.duration;
+                lastProgressTime = data.current;
+                lastProgressRealTime = Date.now();
+            }
+        }
+    } else {
+        let duration = data != 1 ? data : 180;
+        restartAnimation(duration);
+    }
 });
 
 socket.on("playing", (playing) => {

@@ -11,7 +11,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "192.168.1.181:3000", // change this to your local ip
+        origin: "192.168.5.11:3000", // change this to your local ip (run alongside shairport-sync/spotify server)
         methods: ["GET,POST"],
         credentials: true
     },

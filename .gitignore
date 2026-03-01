@@ -38,3 +38,5 @@ npm-debug.log
 # ShairportGUI specific files
 replace.sh
 image.png
+
+.vscode

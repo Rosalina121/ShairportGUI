@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Khula:wght@400;600;700&family=Public+Sans:wght@100;300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   --brShadowColorRaw: 151, 0, 116;
@@ -19,53 +19,57 @@
   --pgPercentage: 100;
   --value: 100;
   --animationDuration: 40s;
-  --progressBackground: #fff
+  --progressBackground: #fff;
+  
+  --coverSize: clamp(300px, 40vw, 600px);
 }
 
 /* change flex direction to column on portrait, adjust for needs */
-@media (max-width: 1200px) {
+@media (max-width: 1000px) {
   .container {
     flex-direction: column !important;
+    justify-content: center !important;
+    gap: 5vh;
   }
 
   .song-details {
-    width: auto !important;
+    width: 90% !important;
     text-align: center;
-    padding-left: 1vw;
-    padding-right: 1vw;
+    padding: 0 !important;
+    align-items: center;
   }
 
   .thumbnail-border {
-    width: 70vw !important;
-    height: 70vw !important;
-    padding: 1vh !important;
+    width: clamp(250px, 70vw, 500px) !important;
+    height: clamp(250px, 70vw, 500px) !important;
   }
-
-  .song-thumbnail {
-    height: 70vw !important;
-    width: 70vw !important;
+  
+  .thumbnail-border {
+    width: clamp(250px, 70vw, 500px) !important;
+    height: clamp(250px, 70vw, 500px) !important;
   }
 
   .song-title {
-    font-size: 8vw !important;
+    font-size: clamp(2rem, 8vw, 4rem) !important;
   }
 
   .album-title {
-    font-size: 4vw !important;
+    font-size: clamp(1rem, 4vw, 2rem) !important;
   }
 
   .artist {
-    font-size: 5vw !important;
+    font-size: clamp(1.2rem, 5vw, 2.5rem) !important;
   }
 }
 
-
 body {
   background-color: #fff;
-  font-family: 'Public Sans', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   color: var(--songColor);
   overflow: hidden;
   margin: 0;
+  height: 100vh;
+  width: 100vw;
 }
 
 .orb-canvas {
@@ -81,12 +85,13 @@ body {
 .container {
   position: absolute;
   z-index: 1000;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 10vw;
 }
 
 .background-img {
@@ -111,8 +116,58 @@ body {
 .song-thumbnail {
   height: 100%;
   width: 100%;
-  border-radius: 50%;
+  object-fit: cover;
+  transition: border-radius 0.3s ease;
+}
+
+.song-thumbnail.spinning {
   animation: spin 40s linear infinite;
+}
+
+.song-thumbnail.spinning.paused {
+  animation-play-state: paused !important;
+}
+
+.thumbnail-border {
+  --pgPercentage: var(--value);
+  background:
+    radial-gradient(closest-side, var(--progressBackground) 80%, transparent 0 99.9%),
+    conic-gradient(var(--borderColor) calc(var(--pgPercentage) * 1%), var(--progressBackground) 0);
+  display: flex;
+  width: var(--coverSize);
+  height: var(--coverSize);
+  padding: 1vw;
+  box-shadow: inset 6px 6px 20px 0 rgba(var(--brShadowColorRaw), 0.2),
+    0px 4px 20px rgba(var(--brShadowColorRaw), 0.1),
+    0px 8px 24px rgba(var(--brShadowColorRaw), 0.1),
+    0px 16px 45px rgba(var(--tlShadowColorRaw), 0.4);
+  cursor: pointer;
+  transition: border-radius 0.3s ease;
+}
+
+.spin-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: border-radius 0.3s ease;
+}
+
+.circle {
+  border-radius: 50% !important;
+}
+
+.rounded-square {
+  border-radius: 15% !important;
+}
+
+.spinning {
+  animation: spin 40s linear infinite;
+}
+
+.spinning.paused {
+  animation-play-state: paused !important;
 }
 
 @keyframes growProgressBar {
@@ -125,12 +180,14 @@ body {
   }
 }
 
-/*
-  Note:
-  Supported only by Chromium
-  Fallback is just a regular border
-  Sorry Firefox users :(
-*/
+.animate {
+  animation: growProgressBar var(--animationDuration) 1 linear forwards;
+  animation-delay: calc(var(--animationCurrent, 0s) * -1);
+}
+
+.animate.paused {
+  animation-play-state: paused !important;
+}
 
 @property --pgPercentage {
   syntax: '<number>';
@@ -138,66 +195,132 @@ body {
   initial-value: 0;
 }
 
-.animate {
-  animation: growProgressBar var(--animationDuration) 1 linear;
-}
-
-.paused {
-  animation-play-state: paused;
-}
-
-.thumbnail-border {
-  --pgPercentage: var(--value);
-  background:
-    radial-gradient(closest-side, var(--progressBackground) 80%, transparent 0 99.9%),
-    conic-gradient(var(--borderColor) calc(var(--pgPercentage) * 1%), var(--progressBackground) 0);
-
-  display: flex;
-  width: 40vw;
-  height: 40vw;
-  border-radius: 50%;
-  padding: 1vw;
-  box-shadow: inset 6px 6px 20px 0 rgba(var(--brShadowColorRaw), 0.2),
-    0px 4px 20px rgba(var(--brShadowColorRaw), 0.1),
-    0px 8px 24px rgba(var(--brShadowColorRaw), 0.1),
-    0px 16px 45px rgba(var(--tlShadowColorRaw), 0.4);
-  cursor: pointer;
-}
-
 .song-details {
   display: flex;
   flex-direction: column;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: normal;
   text-shadow: var(--brShadow), var(--tlShadow);
-  overflow: visible;
-  width: 35%;
-  /* Hardcoded width cause text moves the thumbnail away */
+  width: 40%;
 }
 
 .song-title {
-  font-size: 4.5vw;
+  font-size: clamp(2rem, 4.5vw, 5rem);
   font-weight: bolder;
+  margin-bottom: 0.5rem;
 }
 
 .album-title {
-  font-size: 2.2vw;
+  font-size: clamp(1rem, 2.2vw, 2.5rem);
   color: var(--artistColor);
-  padding-top: 6rem;
   font-weight: 600;
+  margin-bottom: 0.5rem;
 }
 
 .artist {
-  font-size: 2.8vw;
+  font-size: clamp(1.2rem, 2.8vw, 3rem);
   color: var(--artistColor);
-  padding-top: 1.5rem;
   font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.playback-controls {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.playback-controls button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(var(--borderColorRaw), 0.5);
+  color: var(--songColor);
+  font-size: 1.5rem;
+  padding: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(5px);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.playback-controls button:hover {
+  background: rgba(var(--borderColorRaw), 0.3);
+  transform: scale(1.1);
+}
+
+.options-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2000;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(var(--borderColorRaw), 0.5);
+  color: var(--songColor);
+  font-size: 1.5rem;
+  padding: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+  backdrop-filter: blur(5px);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.options-btn:hover {
+  transform: rotate(90deg);
+}
+
+.options-menu {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  z-index: 2000;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(var(--borderColorRaw), 0.5);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  display: none;
+  min-width: 200px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.options-menu.visible {
+  display: block;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.options-menu h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.option-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.option-item label {
+  font-size: 0.9rem;
+  color: #333;
 }
 
 @keyframes spin {
   100% {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }

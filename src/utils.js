@@ -1,5 +1,5 @@
 import fs from "fs";
-import vibrant from "node-vibrant";
+import { Vibrant } from "node-vibrant/node";
 
 let previousPalette = {};
 
@@ -26,13 +26,14 @@ const checkIfImageIsBrightOrDark = (image) => {
 
 const emitPalette = (io, image) => {
     checkIfImageIsBrightOrDark(image);
-    vibrant.from(image).getPalette((err, palette) => {
-        // palette should be same for same images on a single machine, should...
-        if (previousPalette !== palette) {
-            previousPalette = palette;
-            io.emit("palette", palette);
-        }
-    });
+    Vibrant.from(image).getPalette()
+        .then((palette) => {
+            if (previousPalette !== palette) {
+                previousPalette = palette;
+                io.emit("palette", palette);
+            }
+        })
+        .catch((err) => console.error("Palette extraction error:", err));
 };
 
 export function emitSongMeta(io, title, artist, album) {

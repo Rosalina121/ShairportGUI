@@ -15,15 +15,17 @@
         <div class="background-img"></div>
         <canvas class="orb-canvas"></canvas>
         <div class="container">
-            <div class="thumbnail-border" onclick="toggleBackgroundType()">
-                <img
-                    id="cover"
-                    src="http://test.palitechnika.com/Transgender_Pride_flag.png"
-                    class="song-thumbnail"
-                />
+            <div class="thumbnail-border" id="thumbnail-container" onclick="toggleBackgroundType()">
+                <div id="spin-container" class="spin-container">
+                    <img
+                        id="cover"
+                        src="http://test.palitechnika.com/Transgender_Pride_flag.png"
+                        class="song-thumbnail"
+                    />
+                </div>
             </div>
             <!--/thumbnail-border -->
-            <div class="song-details">
+            <div class="song-details"> 
                 <span id="title" class="song-title">Song Title</span>
                 <span id="album" class="album-title">Album title</span>
                 <span id="artist" class="artist">Band ft. Song Artist</span>
@@ -31,6 +33,24 @@
             <!-- /song-details -->
         </div>
         <!-- /container -->
+
+        <button id="options-btn" class="options-btn"><i class="fas fa-cog"></i></button>
+        
+        <div id="options-menu" class="options-menu">
+            <h3>Options</h3>
+            <div class="option-item">
+                <label>Cover Spinning</label>
+                <input type="checkbox" id="spin-toggle" checked />
+            </div>
+            <div class="option-item">
+                <label>Cover Shape</label>
+                <select id="shape-select">
+                    <option value="circle">Circle</option>
+                    <option value="rounded-square">Rounded Square</option>
+                </select>
+            </div>
+        </div>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
         <script type="module" src="fancyBlur.js"></script>
         <script src="scripts.js"></script>

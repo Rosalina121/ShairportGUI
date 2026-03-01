@@ -1,10 +1,10 @@
 {
     "name": "shairportgui",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Web-based GUI server (lol) for shairport-sync",
     "main": "src/index.js",
     "scripts": {
-        "start": "ts-node src/index.js",
+        "start": "tsx src/index.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -19,19 +19,20 @@
     "homepage": "https://github.com/Rosalina121/ShairportGUI#readme",
     "dependencies": {
         "@check-light-or-dark/image": "^1.0.4",
-        "axios": "^0.27.2",
+        "axios": "^1.13.6",
         "dotenv": "^16.0.1",
-        "express": "^4.18.1",
+        "express": "^5.2.1",
         "marvinj": "^1.0.0",
-        "node-vibrant": "^3.2.1-alpha.1",
+        "node-vibrant": "^4.0.4",
         "shairport-sync-reader": "^0.0.9",
-        "socket.io": "^4.5.0",
+        "socket.io": "^4.8.3",
         "spotify-web-api-node": "^5.0.2"
     },
     "devDependencies": {
         "@types/spotify-web-api-node": "^5.0.7",
         "prettier": "2.6.2",
-        "ts-node": "^10.8.1",
+        "ts-node": "^10.9.2",
+        "tsx": "^4.21.0",
         "typescript": "^4.7.3"
     }
 }
